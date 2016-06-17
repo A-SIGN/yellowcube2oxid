@@ -1,0 +1,25 @@
+<?php
+/**
+ * Start the CRON function from here
+ *
+ * PHP version 5
+ *
+ * @category  asign
+ * @package   asign_yellowcube_v1.0_EE_5.2
+ * @author    entwicklung@a-sign.ch
+ * @copyright asign
+ * @license   http://www.a-sign.ch/
+ * @version   1.0
+ * @link      http://www.a-sign.ch/
+ * @see
+ * @since     File available since Release 1.0
+ */
+//OXID framework into action.
+
+define( 'OX_BASE_PATH', dirname( __FILE__ ) . '/../../../' );
+
+require_once OX_BASE_PATH . "bootstrap.php";
+
+$options = $argv;
+$oExecute = oxNew('asign_yellowcubecron', $options);
+

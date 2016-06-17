@@ -1,0 +1,202 @@
+<?php
+/**
+ * Contains PDF blocks information
+ *
+ * @category  asign
+ * @package
+ * @author    entwicklung@a-sign.ch
+ * @copyright asign
+ * @license   http://www.a-sign.ch/
+ * @version   2.0
+ * @link      http://www.a-sign.ch/
+ * @see
+ * @since     File available since Release 1.0
+ */
+
+
+/**
+ * PDF renderer helper class, used to store data, sizes etc..
+ */
+class InvoicepdfBlock
+{
+
+    /**
+     * array of data to render
+     *
+     * @var array
+     */
+    protected $_aCache = array();
+
+    /**
+     * string default Font
+     *
+     * @var array
+     */
+    protected $_sFont = 'helvetica';
+
+    /**
+     * Stores cacheable parameters.
+     *
+     * @param string $sFunc   cacheable function name
+     * @param array  $aParams cacheable parameters
+     */
+    protected function _toCache($sFunc, $aParams)
+    {
+        $oItem = new stdClass();
+        $oItem->sFunc = $sFunc;
+        $oItem->aParams = $aParams;
+        $this->_aCache[] = $oItem;
+    }
+
+    /**
+     * Constructor
+     *
+     * @param object $oData order object
+     * @param object $oPdf  pdf object
+     */
+    public function __construct($oPdf)
+    {
+        $this->_oPdf = $oPdf;
+        $this->_sSize = $this->_oPdf->getFontSize();
+        $this->_sType = $this->_oPdf->getFontFamily();
+        $this->_sWeight = $this->_oPdf->getFontStyle();
+    }
+
+    protected $_oPdf = null;
+    protected $_fLineHeight = 1.0;
+    protected $_sType = null;
+    protected $_sWeight = null;
+    protected $_sSize = null;
+    protected $_iLineCounter = 0;
+
+    const LINEBEGIN = 16;
+    const SUMMARYBEGIN = self::COLTWO;
+    const LINEEND = 196;
+
+    const COLONE = 16;
+    const COLTWO = 76;
+    const COLTHREE = 136;
+
+    public function nextLine($iStartPos, $iJumpLines = 1){
+        $this->_iLineCounter += $iJumpLines;
+        $iStartPos += ($this->_sSize/2 * $this->_fLineHeight) * $iJumpLines;
+        return $iStartPos;
+    }
+
+    public function setLineHeight($fLineHeight){
+        $this->_fLineHeight = $fLineHeight;
+    }
+
+    public function getStringWidth($s){
+        return $this->_oPdf->GetStringWidth($s, $this->_sType, $this->_sWeight, $this->_sSize);
+    }
+
+    public function alignRightToColumn($iColumn, $sText){
+        return $iColumn - $this->getStringWidth($sText) - 2;
+    }
+
+    /**
+     * Runs and evaluates cached code.
+     *
+     * @param object $oPdf object which methods will be executed
+     * @return int
+     */
+    public function run($oPdf)
+    {
+        if($this->_oPdf != null){
+            $oPdf = $this->_oPdf;
+        }
+        foreach ($this->_aCache as $oItem) {
+            $sFn = $oItem->sFunc;
+            switch (count($oItem->aParams)) {
+                case 0:
+                    $oPdf->$sFn();
+                    break;
+                case 1:
+                    $oPdf->$sFn($oItem->aParams[0]);
+                    break;
+                case 2:
+                    $oPdf->$sFn($oItem->aParams[0], $oItem->aParams[1]);
+                    break;
+                case 3:
+                    $oPdf->$sFn($oItem->aParams[0], $oItem->aParams[1], $oItem->aParams[2]);
+                    break;
+                case 4:
+                    $oPdf->$sFn($oItem->aParams[0], $oItem->aParams[1], $oItem->aParams[2], $oItem->aParams[3]);
+                    break;
+            }
+        }
+
+        return $this->_iLineCounter;
+    }
+
+    /**
+     * Caches Line call with parameters.
+     *
+     * @param int $iLPos    left position
+     * @param int $iLHeight left height
+     * @param int $iRPos    right position
+     * @param int $iRHeight right height
+     */
+    public function line($iLPos, $iLHeight, $iRPos, $iRHeight)
+    {
+        $this->_toCache('Line', array($iLPos - 1, $iLHeight - 0.5 , $iRPos + 1, $iRHeight - 0.5));
+    }
+
+    /**
+     * Caches Text call with parameters.
+     *
+     * @param int    $iLPos    left position
+     * @param int    $iLHeight height
+     * @param string $sString  string to write
+     */
+    public function text($iLPos, $iLHeight, $sString)
+    {
+        $this->_toCache('Text', array($iLPos, $iLHeight, $sString));
+    }
+
+    /**
+     * Caches SetFont call with parameters.
+     *
+     * @param string $sType   font type (Arial, Tahoma ...)
+     * @param string $sWeight font weight ('', 'B', 'U' ...)
+     * @param string $sSize   font size ('10', '8', '6' ...)
+     */
+    public function font($sType, $sWeight, $sSize)
+    {
+        $this->_sSize = $sSize;
+        $this->_sType = $sType;
+        $this->_sWeight = $sWeight;
+        $this->_toCache('SetFont', array($sType, $sWeight, $sSize));
+    }
+
+    /**
+     * Adjusts height after new page addition.
+     *
+     * @param int $iDelta new height
+     */
+    public function ajustHeight($iDelta)
+    {
+        foreach ($this->_aCache as $key => $oItem) {
+            switch ($oItem->sFunc) {
+                case 'Line':
+                    $this->_aCache[$key]->aParams[3] += $iDelta;
+                    $this->_aCache[$key]->aParams[1] += $iDelta;
+                    break;
+                case 'Text':
+                    $this->_aCache[$key]->aParams[1] += $iDelta;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Caches SetFont call with parameters.
+     *
+     * @return string
+     */
+    public function getFont()
+    {
+        return $this->_sFont;
+    }
+}

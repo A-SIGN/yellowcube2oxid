@@ -1,0 +1,473 @@
+<?php
+
+/**
+ * Class cn22labelpdfblock
+ *
+ * This file is an extension of the OXID eSales PDF plugin to generate CN 22 export formulars for the shop.
+ * @link      http://www.a-sign.ch
+ * @copyright Johannes Rebhan A-SIGN GmbH 2015
+ * @version   1.0
+ */
+class cn22labelpdfblock extends InvoicepdfBlock
+{
+
+    protected $_oData = null;
+    protected $_iPosition = null;
+    protected $_oArticles = null;
+    protected $_fTotalWeight = 0.0;
+
+    /**
+     * A couple of consts for easier administration of the PDF layout
+     */
+    const LINEBEGIN = 10;
+    const LINEEND = 120;
+    const COLONE = self::LINEBEGIN;
+    const COLTWO = 50;
+    const COLTHREE = 65;
+    const COLFOUR = 80;
+    const ADDRESSLEFT = 125;
+    const ADDRESSTOP = 50;
+
+    /**
+     * Constructor
+     *
+     * @param object $oData order object
+     * @param object $oPdf pdf object
+     */
+    public function __construct($oData, $oPdf)
+    {
+        $this->_oData = $oData;
+        parent::__construct($oPdf);
+    }
+
+    /**
+     * Caches Line call with parameters.
+     *
+     * @param int $iLPos left position
+     * @param int $iLHeight left height
+     * @param int $iRPos right position
+     * @param int $iRHeight right height
+     */
+    public function line($iLPos, $iLHeight, $iRPos, $iRHeight)
+    {
+        $this->_toCache('Line', array($iLPos, $iLHeight, $iRPos, $iRHeight));
+    }
+
+    /**
+     * Generates order info block (prices, VATs, etc ).
+     *
+     */
+    public function generate()
+    {
+        $this->_iPosition = 10;
+        $iDocStart = $this->_iPosition;
+
+        $this->font($this->getFont(), '', 5);
+        $this->setLineHeight(1.0);
+
+        $this->line(self::LINEBEGIN, $this->_iPosition, self::LINEEND, $this->_iPosition);
+
+        $this->_addCN22Header();
+
+        $this->line(self::LINEBEGIN, $this->_iPosition, self::LINEEND, $this->_iPosition);
+
+        $this->_addPackageType();
+
+        $this->line(self::LINEBEGIN, $this->_iPosition, self::LINEEND, $this->_iPosition);
+
+        $this->_addOrderTable();
+
+        $this->line(self::LINEBEGIN, $this->_iPosition, self::LINEEND, $this->_iPosition);
+
+        $this->_addDisclaimerText();
+
+        $this->line(self::LINEBEGIN, $this->_iPosition, self::LINEEND, $this->_iPosition);
+
+        $this->_addDateAndSignature();
+
+        $this->line(self::LINEBEGIN, $this->_iPosition, self::LINEEND, $this->_iPosition);
+
+        $this->line(self::LINEBEGIN, $iDocStart, self::LINEBEGIN, $this->_iPosition);
+        $this->line(self::LINEEND, $iDocStart, self::LINEEND, $this->_iPosition);
+
+        $this->_addShippingAddress();
+    }
+
+    /**
+     * Generates the CN22 header with the swiss post logo and title in three languages
+     */
+    protected function _addCN22Header()
+    {
+        $this->font($this->getFont(), 'B', 6);
+        $this->setLineHeight(1.4);
+        $this->_addImage('swiss_post_en_logo.jpg', self::LINEBEGIN, $this->_iPosition+1, 6);
+        $this->text(self::LINEBEGIN + 29, $this->_iPosition + 1, 'Déclaration en douane / Zolldeklaration / Customs Declaration');
+
+        $this->font($this->getFont(), 'B', 14);
+        $sFormType = 'CN 22';
+        $this->text($this->alignRightToColumn(self::LINEEND, $sFormType), $this->_iPosition+1, $sFormType);
+        $this->font($this->getFont(), 'B', 6);
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+        $this->font($this->getFont(), '', 5);
+        $this->text(self::LINEBEGIN + 29, $this->_iPosition, 'Peut être ouvert d‘office / Zollamtliche Prüfung gestattet / May be opened officially');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+    }
+
+    /**
+     * Add the package types and select the one configured in the module backend config
+     */
+    protected function _addPackageType()
+    {
+        $iColumnWidth = 30;
+
+        $iColOne = self::LINEBEGIN + 10;
+        $iColTwo = $iColOne + $iColumnWidth;
+        $iColThree = $iColTwo + $iColumnWidth;
+        $iColFour = $iColThree + $iColumnWidth;
+
+        $this->font($this->getFont(), '', 5);
+        $this->setLineHeight(1.0);
+
+        $oConfig = oxRegistry::getConfig();
+        $iMarkLeftShift = 5;
+        switch ($oConfig->getConfigParam('sCN22OrderType')) {
+            case 'G':
+                $iCN22OrderType = $iColOne - $iMarkLeftShift;
+                break;
+            case 'C':
+                $iCN22OrderType = $iColTwo - $iMarkLeftShift;
+                break;
+            case 'D':
+                $iCN22OrderType = $iColThree - $iMarkLeftShift;
+                break;
+            default:
+                $iCN22OrderType = $iColFour - $iMarkLeftShift;
+        }
+
+        $this->font($this->getFont(), 'B', 14);
+        $this->text($iCN22OrderType, $this->_iPosition, 'X');
+        $this->font($this->getFont(), '', 5);
+
+        $this->text($iColOne, $this->_iPosition, 'Cadeau');
+        $this->text($iColTwo, $this->_iPosition, 'Echantillon commercial');
+        $this->text($iColThree, $this->_iPosition, 'Documents');
+        $this->text($iColFour, $this->_iPosition, 'Autre');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+
+        $this->text($iColOne, $this->_iPosition, 'Geschenk');
+        $this->text($iColTwo, $this->_iPosition, 'Warenmuster');
+        $this->text($iColThree, $this->_iPosition, 'Dokumente');
+        $this->text($iColFour, $this->_iPosition, 'Andere');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+
+        $this->text($iColOne, $this->_iPosition, 'Gift');
+        $this->text($iColTwo, $this->_iPosition, 'Commercial sample');
+        $this->text($iColThree, $this->_iPosition, 'Documents');
+        $this->text($iColFour, $this->_iPosition, 'Other');
+        $this->setLineHeight(1.1);
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+
+    }
+
+    /**
+     *  Generates the order table and paints the vertical lines to separate the columns
+     */
+    protected function _addOrderTable()
+    {
+
+        $iTableStart = $this->_iPosition;
+
+        $this->_addOrderTableHeader();
+
+        $this->line(self::LINEBEGIN, $this->_iPosition, self::LINEEND, $this->_iPosition);
+
+        $this->_addArticleList();
+
+        $this->line(self::LINEBEGIN, $this->_iPosition, self::LINEEND, $this->_iPosition);
+
+        $this->_addShippingInfo();
+
+        $this->line(self::LINEBEGIN, $this->_iPosition, self::LINEEND, $this->_iPosition);
+
+        $this->_addOrderSummary();
+
+        $this->line(self::COLTWO, $iTableStart, self::COLTWO, $this->_iPosition);
+        $this->line(self::COLTHREE, $iTableStart, self::COLTHREE, $this->_iPosition);
+        $this->line(self::COLFOUR, $iTableStart, self::COLFOUR, $this->_iPosition);
+    }
+
+    /**
+     * Generates the header columns that describe the content of the CN22 article list table
+     */
+    protected function _addOrderTableHeader()
+    {
+
+        $this->font($this->getFont(), '', 5);
+        $this->setLineHeight(1.0);
+
+        $this->text(self::COLONE, $this->_iPosition, 'Quantité et description détaillée du contenu (1)');
+        $this->text(self::COLTWO, $this->_iPosition, 'Poids (2)');
+        $this->text(self::COLTHREE, $this->_iPosition, 'Valeur (3)');
+        $this->text(self::COLFOUR, $this->_iPosition, 'N° tarifaire du SH et origine (4)');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+
+        $this->text(self::COLONE, $this->_iPosition, 'Menge und detaillierte Beschreibung des Inhalts');
+        $this->text(self::COLTWO, $this->_iPosition, 'Gewicht (kg)');
+        $this->text(self::COLTHREE, $this->_iPosition, 'Wert');
+        $this->text(self::COLFOUR, $this->_iPosition, 'Zolltarifnummer und Herkunft');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+
+        $this->text(self::COLONE, $this->_iPosition, 'Quantity and detail description of contents');
+        $this->text(self::COLTWO, $this->_iPosition, 'Weight(kg)');
+        $this->text(self::COLTHREE, $this->_iPosition, 'Value');
+        $this->text(self::COLFOUR, $this->_iPosition, 'HS tariff number and country of origin');
+        $this->setLineHeight(1.1);
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+
+    }
+
+    /**
+     * Generates the list of articles in the order up to a limit of 5 articles. Additional articles and their weight are forfeited.
+     */
+    protected function _addArticleList()
+    {
+        if (!$this->_oArticles) {
+            $this->_oArticles = $this->_oData->getOrderArticles(true);
+        }
+
+        $this->font($this->getFont(), '', 5);
+        $this->setLineHeight(1.2);
+        $oLang = oxRegistry::getLang();
+        $oCurr = $this->_oData->getCurrency();
+
+        $sCustomsFieldName = 'oxorderarticles__' . asign_ycaddfields_db::CUSTOMS;
+        $sTaraFieldName = 'oxorderarticles__' . asign_ycaddfields_db::TARA;
+        $sOriginFieldName = 'oxorderarticles__' . asign_ycaddfields_db::ORIGIN;
+
+        $iCount = 0;
+
+        foreach ($this->_oArticles as $key => $oOrderArt) {
+            if($iCount >= 5){
+                break; // list only five products due to space limitations
+            }
+
+            $sText = $oOrderArt->oxorderarticles__oxamount->value . ' x ' . substr($oOrderArt->oxorderarticles__oxtitle->value, 0, 32);
+            $this->text(self::COLONE, $this->_iPosition, $sText);
+
+            $fLineWeight = $oOrderArt->oxorderarticles__oxweight->value - $oOrderArt->$sTaraFieldName->value;
+            $this->_fTotalWeight += $fLineWeight;
+            $this->text(self::COLTWO, $this->_iPosition, $fLineWeight . "kg");
+            $dTotalPrice = ($this->_oData->isNettoMode()) ? $oOrderArt->oxorderarticles__oxnetprice->value : $oOrderArt->oxorderarticles__oxbrutprice->value;
+            $sText = $oLang->formatCurrency($dTotalPrice, $oCurr) . ' ' . $oCurr->name;
+            $this->text($this->alignRightToColumn(self::COLFOUR, $sText), $this->_iPosition, $sText);
+            $this->text(self::COLFOUR, $this->_iPosition, $oOrderArt->$sCustomsFieldName->value);
+            $oCountry = oxNew('oxcountry');
+            $oCountry->loadInLang($this->_oData->getSelectedLang(), $oOrderArt->$sOriginFieldName->value);
+            $this->text(self::COLFOUR + 25, $this->_iPosition, $oCountry->oxcountry__oxisoalpha2->value);
+            $this->_iPosition = $this->nextLine($this->_iPosition);
+            $iCount++;
+        }
+    }
+
+    /**
+     * Generates the shipping cost line in the order table
+     */
+    protected function _addShippingInfo()
+    {
+        $this->font($this->getFont(), '', 5);
+        $this->setLineHeight(1.1);
+
+        $oLang = oxRegistry::getLang();
+
+        $oCurr = $this->_oData->getOrderCurrency();
+
+        $sText = $oLang->formatCurrency($this->_oData->oxorder__oxdelcost->value, $oCurr) . ' ' . $oCurr->name;
+
+        $this->text(self::COLONE, $this->_iPosition, 'Verpackung und Versand / Shipping Costs');
+        $this->text($this->alignRightToColumn(self::COLFOUR, $sText), $this->_iPosition, $sText);
+        $this->setLineHeight(1.2);
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+    }
+
+    /**
+     * Generates the order summary values of weight and order value
+     */
+    protected function _addOrderSummary()
+    {
+        $this->font($this->getFont(), '', 5);
+        $this->setLineHeight(1.0);
+
+        $this->text($this->alignRightToColumn(self::COLTWO, 'Poids total (5)'), $this->_iPosition, 'Poids total (5)');
+        $this->text(self::COLFOUR, $this->_iPosition, 'Valeur totale (6) + monnaie');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+
+        $this->text($this->alignRightToColumn(self::COLTWO, 'Gesamtgewicht (kg)'), $this->_iPosition, 'Gesamtgewicht (kg)');
+        $this->text(self::COLTWO, $this->_iPosition, $this->_fTotalWeight . 'kg');
+        $sTotalOrderSum = $this->_oData->getFormattedTotalOrderSum() . ' ' . $this->_oData->getCurrency()->name;
+        $this->text($this->alignRightToColumn(self::COLFOUR, $sTotalOrderSum), $this->_iPosition, $sTotalOrderSum);
+        $this->text(self::COLFOUR, $this->_iPosition, 'Gesamtwert + Währung');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+
+        $this->text($this->alignRightToColumn(self::COLTWO, 'Total Weight (kg)'), $this->_iPosition, 'Total Weight (kg)');
+        $this->text(self::COLFOUR, $this->_iPosition, 'Total Value + Currency');
+        $this->setLineHeight(1.1);
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+    }
+
+    /**
+     * Prints the disclaimer text. Since it won't change often the lines are separated manually.
+     */
+    protected function _addDisclaimerText()
+    {
+        $this->font($this->getFont(), '', 5);
+        $this->setLineHeight(0.9);
+
+        $this->text(self::LINEBEGIN, $this->_iPosition, 'Je certifie que les renseignements donnés dans la présente déclaration sont exacts et que cet envoi ne contient aucun objet');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+        $this->text(self::LINEBEGIN, $this->_iPosition, 'dangereux ou interdit par la réglementation postale ou douanière.  •  Ich bestätige hiermit, dass die Angaben in der vor-');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+        $this->text(self::LINEBEGIN, $this->_iPosition, 'liegenden Deklaration richtig sind und dass die Sendung keine durch die Post- oder Zollvorschriften verbotenen oder gefähr-');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+        $this->text(self::LINEBEGIN, $this->_iPosition, 'lichen Gegenstände enthält.  •  I, the undersigned, whose name and address are given on the Item, certify that the particulars');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+        $this->text(self::LINEBEGIN, $this->_iPosition, 'given in the declaration are correct and that this Item does not contain any dangerous article or articles prohibited by legis-');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+        $this->text(self::LINEBEGIN, $this->_iPosition, 'lation or by postal ort customs regulations.');
+        $this->setLineHeight(1.1);
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+    }
+
+    /**
+     * Adds the order date (the date the PDF is generated) and sets the signature image
+     */
+    protected function _addDateAndSignature()
+    {
+
+        $this->_addSignatureImage();
+
+        $this->text(self::COLONE, $this->_iPosition, 'Date, signature (7)');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+
+        $this->text(self::COLONE, $this->_iPosition, 'Datum, Unterschrift');
+        $this->text(self::COLTWO, $this->_iPosition, date('d.m.Y'));
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+
+        $this->text(self::COLONE, $this->_iPosition, 'Date, Senders signature');
+        $this->_iPosition = $this->nextLine($this->_iPosition);
+    }
+
+    /**
+     * Creates the signature with the signature image.
+     */
+    public function _addSignatureImage()
+    {
+        $this->_addImage('owner_signature.jpg', self::COLTHREE, $this->_iPosition, 8);
+    }
+
+    /**
+     * General helper function to place an image based on a fixed height.
+     * The corresponding width is calculated automatically based on the aspect ratio of the original image.
+     *
+     * @param $sFilename
+     * @param $iColumn
+     * @param $iLine
+     * @param $iHeight
+     */
+    protected function _addImage($sFilename, $iColumn, $iLine, $iHeight)
+    {
+        $sFilepath = oxRegistry::getConfig()->getModulesDir() . 'asign/asign_invoicepdf/out/img/' . $sFilename;
+
+        $aSize = getimagesize($sFilepath);
+
+        // scale image with fixed aspect ratio to fit the designated $iHeight
+        $fConversion = $aSize[0] / $aSize[1];
+        $iWidth = $iHeight * $fConversion;
+
+        $this->_oPdf->image($sFilepath, $iColumn, $iLine, $iWidth);
+    }
+
+    /**
+     * Generates the shop owner address line and returns the value of the line below it
+     * @return float
+     */
+    protected function _addShopAddressHeader()
+    {
+        // loading active shop
+        $oShop = oxRegistry::getConfig()->getActiveShop();
+
+        // shop information
+        $this->font($this->getFont(), 'U', 6);
+        $this->text(self::ADDRESSLEFT, self::ADDRESSTOP, $oShop->oxshops__oxname->getRawValue() . ' - ' . $oShop->oxshops__oxstreet->getRawValue() . ' - ' . $oShop->oxshops__oxzip->value . ' ' . $oShop->oxshops__oxcity->getRawValue());
+        return $this->nextLine(self::ADDRESSTOP, 3);
+    }
+
+    /**
+     * Set billing address info to pdf.
+     */
+    protected function _addBillingAddress($iLine)
+    {
+        $this->font($this->getFont(), '', 8);
+        $this->setLineHeight(1.1);
+
+        $sSal = $this->_oData->translate($this->_oData->oxorder__oxbillsal->value);
+
+        if ($this->_oData->oxorder__oxbillcompany->value !== '') {
+            $this->text(self::ADDRESSLEFT, $iLine, $this->_oData->oxorder__oxbillcompany->getRawValue());
+            $iLine = $this->nextLine($iLine);
+        }
+        $this->text(self::ADDRESSLEFT, $iLine, $sSal . ' ' . $this->_oData->oxorder__oxbillfname->getRawValue() . ' ' . $this->_oData->oxorder__oxbilllname->getRawValue());
+        $iLine = $this->nextLine($iLine);
+        $this->text(self::ADDRESSLEFT, $iLine, $this->_oData->oxorder__oxbillstreet->getRawValue() . ' ' . $this->_oData->oxorder__oxbillstreetnr->value);
+        $this->font($this->getFont(), 'B', 8);
+        $iLine = $this->nextLine($iLine);
+        $this->text(self::ADDRESSLEFT, $iLine, $this->_oData->oxorder__oxbillzip->value . ' ' . $this->_oData->oxorder__oxbillcity->getRawValue());
+        $iLine = $this->nextLine($iLine);
+        $this->font($this->getFont(), '', 8);
+        $this->text(self::ADDRESSLEFT, $iLine, $this->_oData->oxorder__oxbillcountry->getRawValue());
+
+    }
+
+    /**
+     * Set delivery address info to pdf.
+     *
+     */
+    protected function _addDeliveryAddress($iLine)
+    {
+        $this->font($this->getFont(), '', 8);
+        $this->setLineHeight(1.1);
+
+        $sSal = $this->_oData->translate($this->_oData->oxorder__oxbillsal->value);
+
+        if ($this->_oData->oxorder__oxdelcompany->value !== '') {
+            $this->text(self::ADDRESSLEFT, $iLine, $this->_oData->oxorder__oxdelcompany->getRawValue());
+            $iLine = $this->nextLine($iLine);
+        }
+        $this->text(self::ADDRESSLEFT, $iLine, $sSal . ' ' . $this->_oData->oxorder__oxdellname->getRawValue() . ' ' . $this->_oData->oxorder__oxdelfname->getRawValue());
+        $iLine = $this->nextLine($iLine);
+        $this->text(self::ADDRESSLEFT, $iLine, $this->_oData->oxorder__oxdelstreet->getRawValue() . ' ' . $this->_oData->oxorder__oxdelstreetnr->value);
+        $this->font($this->getFont(), 'B', 8);
+        $iLine = $this->nextLine($iLine);
+        $this->text(self::ADDRESSLEFT, $iLine, $this->_oData->oxorder__oxdelzip->value . ' ' . $this->_oData->oxorder__oxdelcity->getRawValue());
+        $iLine = $this->nextLine($iLine);
+        $this->font($this->getFont(), '', 8);
+        $this->text(self::ADDRESSLEFT, $iLine, $this->_oData->oxorder__oxdelcountry->getRawValue());
+    }
+
+    /**
+     * Generates the shipping address section and selects the valid shipping address either by taking the billing address, or
+     * by selecting the shipping address should one be set for this order.
+     */
+    protected function _addShippingAddress()
+    {
+
+        $iLine = $this->_addShopAddressHeader();
+
+        if ($this->_oData->oxorder__oxdelsal->value) {
+            $this->_addDeliveryAddress($iLine);
+        } else {
+            $this->_addBillingAddress($iLine);
+        }
+
+    }
+
+}

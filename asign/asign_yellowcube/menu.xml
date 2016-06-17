@@ -1,0 +1,23 @@
+<OX>
+    <OXMENU id="NAVIGATION_ESHOPADMIN">
+        <MAINMENU id="mxmanageprod">
+            <SUBMENU id="mxarticles" cl="article" list="article_list">
+                <TAB id="tbclyellowcube" cl="asign_yellowcube_articles" />
+            </SUBMENU>            
+        </MAINMENU>
+        <MAINMENU id="mxorders">            
+            <SUBMENU id="mxdisplayorders" cl="admin_order" list="order_list">
+                <TAB id="tbclyellowcube" cl="asign_yellowcube_orders" />
+                <TAB id="tbclycubereturn" cl="asign_yellowcube_return" />
+            </SUBMENU>            
+        </MAINMENU>        
+    </OXMENU>
+    <OXMENU id="ASIGN_OXMENU">
+        <MAINMENU id="ASIGN_YELLOWCUBE">
+            <SUBMENU id="ASIGN_OVERVIEW" cl="asign_yellowcube" list="asign_yellowcube_list">
+                <TAB id="ASIGN_OVERVIEW" cl="asign_yellowcube_main" />                
+            </SUBMENU>
+            <SUBMENU id="ASIGN_LOGS" cl="asign_yellowcube_logs" />
+        </MAINMENU>
+    </OXMENU>
+</OX>

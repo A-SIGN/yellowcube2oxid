@@ -1,0 +1,280 @@
+<?php
+/**
+ * This file is EN language idents
+ *
+ * PHP version 5
+ *
+ * @category  Asign
+ * @package   Asign_Yellowcube_V_EE
+ * @author    Asign <entwicklung@a-sign.ch>
+ * @copyright asign
+ * @license   http://www.a-sign.ch/
+ * @version   2.0
+ * @link      http://www.a-sign.ch/
+ * @see       Deutsch language idents
+ * @since     File available since Release 2.0
+ */
+$sLangName  = "Deutsch";
+// -------------------------------
+// RESOURCE IDENTITFIER = STRING
+// -------------------------------
+$aLang = array(
+    'charset'   => 'UTF-8',
+
+    'tbclyellowcube'            => 'Yellowcube',
+    'tbclycubereturn'           => 'Yellowcube-Return',
+    'ASIGN_OXMENU'              => '<img src="../modules/asign/asign_yellowcube/images/as_icon.png">',
+    'ASIGN_YELLOWCUBE'          => 'Yellowcube',
+    'GENERAL_YELLOWCUBE_HEADING'=> 'Yellowcube v2.0: Inventory',
+    'GENERAL_YELLOWCUBELOGS_HEADING'            => 'Yellowcube v2.0: Error Logs',
+    'ASIGN_OVERVIEW'            => '&Uuml;bersicht',
+    'ASIGN_LOGS'=> 'Logs',
+    'ASIGN_LOGFILE_UNREADABLE'  => "Zugriff verweigert: modules/asign/asign_yellowcube/logs/YClogs.log dir erfordert 777 Genehmigung.",
+
+    // module setting labels and helptext ...
+    'SHOP_MODULE_GROUP_authentic'               => 'Authentication',
+    'SHOP_MODULE_GROUP_additional'              => 'Partner Information',
+    'SHOP_MODULE_GROUP_certificate'             => 'Certificate Information',
+    'SHOP_MODULE_GROUP_order'   => 'Order Information',
+    'SHOP_MODULE_GROUP_cronjob' => 'CRON Job Information',
+    'SHOP_MODULE_GROUP_developer'               => 'Developer Mode',
+    'SHOP_MODULE_GROUP_orderdoc'=> 'Order Document [PDF|PCL] Information',
+    'SHOP_MODULE_GROUP_article' => 'Article Information',
+    'SHOP_MODULE_sYellowCubeMode'               => 'Yellowcube Operating Mode',
+    'SHOP_MODULE_sYellowCubeMode_T'             => 'Test',
+    'SHOP_MODULE_sYellowCubeMode_P'             => 'Production',
+    'SHOP_MODULE_sYellowCubeMode_D'             => 'Development',
+    'HELP_SHOP_MODULE_sYellowCubeMode'          => 'Yellowcube Operating Modes: Test or Production. Before going Live set Mode to Production mode. Default value Test mode.',
+
+    'SHOP_MODULE_sYellowCubeEsdSend'            => 'Send to Yellowcube',
+    'SHOP_MODULE_sYellowCubeFlag'               => 'Yellowcube Operating Mode',
+    'SHOP_MODULE_sYellowCubeFlag_U'             => 'Update',
+    'SHOP_MODULE_sYellowCubeFlag_D'             => 'Deactivate',
+    'SHOP_MODULE_sYellowCubeFlag_I'             => 'Insert',
+    'HELP_SHOP_MODULE_sYellowCubeFlag'          => 'Yellowcube Change Flags: Update, Delete and Insert. This option decides what action to be take on the articles. Option will be used most for automated process.',
+
+    'SHOP_MODULE_sYellowCubeDepositorNo'        => 'Yellowcube Depositor No.',
+    'HELP_SHOP_MODULE_sYellowCubeDepositorNo'   => 'Specify Yellowcube Depositor Number or Customer Number. e.g. 0000054321, 0000010154.',
+
+    'SHOP_MODULE_sYellowCubeWsdlUrl'            => 'WSDL Connection URL',
+    'HELP_SHOP_MODULE_sYellowCubeWsdlUrl'       => 'Specify the WSDL Connection URL which is responsible for Yellowcube operations.',
+
+    'SHOP_MODULE_sYellowCubeSender'             => 'Sender identity',
+    'HELP_SHOP_MODULE_sYellowCubeSender'        => 'Set the sender identity for connection/Authentication. For Testing purpose YCTest has been used. Later Live sender details can be used.',
+
+    'SHOP_MODULE_sYellowCubeUseTestRefNo'       => 'Use Test Order Reference ',
+    'HELP_SHOP_MODULE_sYellowCubeUseTestRefNo'  => 'If selected then the Test order Reference will be used i.e. 546698. Else active Order reference number will be used. Only for <strong>Testing purpose</strong> only.',
+
+    'SHOP_MODULE_sYellowCubeReceiver'           => 'Receiver Identity',
+    'HELP_SHOP_MODULE_sYellowCubeReceiver'      => 'Currently default value YELLOWCUBE has been set. Can be modified during LIVE integration.',
+
+    'SHOP_MODULE_sYellowCubePartner'            => 'Referenz des Partners',
+    'HELP_SHOP_MODULE_sYellowCubePartner'       => 'Reference  of the partner. z.B. A-SIGN AG',
+
+    'SHOP_MODULE_sYellowCubePartnerNo'          => 'Partner Nummer',
+    'SHOP_MODULE_sYellowCubeCertFile'           => 'Certificate Filename',
+    'HELP_SHOP_MODULE_sYellowCubeCertFile'      => 'Specify the SPS Certificate filename placed under your Shop-root /cert folder.',
+
+    'SHOP_MODULE_sYellowCubeCertPass'           => 'Certificate Pass-phrase',
+    'SHOP_MODULE_blYellowCubeCertForAll'        => 'Use Certificate for all modes',
+
+    'SHOP_MODULE_sYellowCubePType'              => 'Partner Type',
+    'HELP_SHOP_MODULE_sYellowCubePType'         => 'WE = Warenempfänger (Im Standard YellowCube wird nur eine Partnerrolle neben dem Aufgeber unterstützt.)',
+
+    'SHOP_MODULE_sYellowCubePlant'              => 'Plant ID',
+    'HELP_SHOP_MODULE_sYellowCubePlant'         => 'Plant is the place where the product is stored in the auto-store. Bearing ID as a work ID according to the profile distance dealer. e.g. Y001, Y004, Y010, etc.',
+
+    'SHOP_MODULE_sYellowCubeTransMaxTime'       => 'Maximum waiting Time (in seconds)',
+
+    'SHOP_MODULE_sYellowCubeShipping'           => 'Yellowcube Versand',
+    'HELP_SHOP_MODULE_sYellowCubeShipping'      => 'Basis-Produkte für YellowCube Versand: "ECO", "PRI", "ECO LKW", "PICKUP" (Selbstabholung), "LKW EXPRESS", "SKB", "SP SEM", etc.',
+
+    'SHOP_MODULE_sYellowCubeQuantityISO'        => 'Default Quantity (ISO)',
+    'SHOP_MODULE_sYellowCubeQuantityISO_PCE'    => 'PCE',
+    'SHOP_MODULE_sYellowCubeQuantityISO_KGM'    => 'KGM',
+    'SHOP_MODULE_sYellowCubeQuantityISO_GRM'    => 'GRM',
+    'HELP_SHOP_MODULE_sYellowCubeQuantityISO'   => 'Verkaufs-Mengeneinheit in ISO-Code. Werte gemäss gültiger, mit Kunde vereinbarter Verkaufsmengenheinheiten.',
+
+    'SHOP_MODULE_sYellowCubeYCLot'              => 'Chargennummer',
+    'SHOP_MODULE_sYellowCubeLot'=> 'Lieferanten-Chargennummer',
+    'SHOP_MODULE_sYellowCubePMessage'           => 'Kommissioniertexte (Default)',
+
+    'SHOP_MODULE_sYellowCubeRReason'            => 'Return Reason for this Order',
+    'HELP_SHOP_MODULE_sYellowCubeRReason'       => 'Retouren-Grund gemäss YC-Retouren-Code-Liste z.B. "R06" - Anderer Artikel geliefert als bestellt.',
+
+    'SHOP_MODULE_sYellowCubeCronHash'            => 'Cron-job Hash value',
+    'HELP_SHOP_MODULE_sYellowCubeCronHash'       => 'Security measure to make sure the script is not called anonymously without Hash Tag',
+
+    'SHOP_MODULE_sYellowCubeNotifyEmail'         => 'Developer Email-address',
+    'HELP_SHOP_MODULE_sYellowCubeNotifyEmail'    => 'This should be used only during Development or debugging process. SPS XML Request and Response will be sent on this email address.',
+
+    'SHOP_MODULE_sYellowCubeNetWeightISO'           => 'Default Nettogewicht (ISO)',
+    'SHOP_MODULE_sYellowCubeNetWeightISO_GRM'       =>  'Gramm [gr]',
+    'SHOP_MODULE_sYellowCubeNetWeightISO_KGM'       =>  'Kilogramm [kg]',
+
+    'SHOP_MODULE_sYellowCubeGrossWeightISO'         => 'Default Bruttogewicht (ISO)',
+    'SHOP_MODULE_sYellowCubeGrossWeightISO_GRM'     =>  'Gramm [gr]',
+    'SHOP_MODULE_sYellowCubeGrossWeightISO_KGM'     =>  'Kilogramm [kg]',
+
+    'SHOP_MODULE_sYellowCubeBatchMngtReq'           => 'Chargenpflicht',
+    'SHOP_MODULE_sYellowCubePeriodExpDateType'      => 'Period Expiry Date Type',
+    'SHOP_MODULE_sYellowCubePeriodExpDateType_0'    => '--',
+    'SHOP_MODULE_sYellowCubePeriodExpDateType_1'    => 'Woche',
+    'SHOP_MODULE_sYellowCubePeriodExpDateType_2'    => 'Monat',
+    'SHOP_MODULE_sYellowCubePeriodExpDateType_3'    => 'Jahr',
+
+    'SHOP_MODULE_sYellowCubeSerialNoFlag'       => 'Seriennummer-Erfassung',
+
+    'SHOP_MODULE_sYellowCubeMinRemLife'         => 'Restlaufzeit',
+    'SHOP_MODULE_sYellowCubeEANType'            => 'EANType',
+    'SHOP_MODULE_sYellowCubeEANType_HE'         =>  'Hersteller-EAN',
+    'SHOP_MODULE_sYellowCubeEANType_HK'         =>  'Hersteller-Kurz-EAN',
+    'SHOP_MODULE_sYellowCubeEANType_I6'         =>  'ITF-Code - 16stellig',
+    'SHOP_MODULE_sYellowCubeEANType_IC'         =>  'ITF-Code',
+    'SHOP_MODULE_sYellowCubeEANType_IE'         =>  'Instore-EAN (int. Vergabe mögl.)',
+    'SHOP_MODULE_sYellowCubeEANType_IK'         =>  'Instore-Kurz-EAN (int. Vergabe mögl.)',
+    'SHOP_MODULE_sYellowCubeEANType_UC'         =>  'UPC-Code',
+    'SHOP_MODULE_sYellowCubeEANType_VC'         =>  'Velocity-Code (int. Vergabe mögl.)',
+
+    'SHOP_MODULE_sYellowCubeAlternateUnitISO'   => 'Alterantive Basismengen-Einheit',
+    'SHOP_MODULE_sYellowCubeAltNumeratorUOM'    => 'Zähler - Alternative Basismenge',
+    'SHOP_MODULE_sYellowCubeAltDenominatorUOM'  => 'Nenner - Alternative Basismenge',
+
+    'SHOP_MODULE_sYellowCubeLengthISO'          => 'Länge',
+    'SHOP_MODULE_sYellowCubeLengthISO_CMT'      =>  'Centimeter',
+    'SHOP_MODULE_sYellowCubeLengthISO_MTR'      =>  'Meter',
+    'SHOP_MODULE_sYellowCubeLengthISO_MMT'      =>  'Millimeter',
+
+    'SHOP_MODULE_sYellowCubeWidthISO'           => 'Breite',
+    'SHOP_MODULE_sYellowCubeWidthISO_CMT'      =>  'Centimeter',
+    'SHOP_MODULE_sYellowCubeWidthISO_MTR'      =>  'Meter',
+    'SHOP_MODULE_sYellowCubeWidthISO_MMT'      =>  'Millimeter',
+
+    'SHOP_MODULE_sYellowCubeHeightISO'          => 'Höhe',
+    'SHOP_MODULE_sYellowCubeHeightISO_CMT'      =>  'Centimeter',
+    'SHOP_MODULE_sYellowCubeHeightISO_MTR'      =>  'Meter',
+    'SHOP_MODULE_sYellowCubeHeightISO_MMT'      =>  'Millimeter',
+
+    'SHOP_MODULE_sYellowCubeVolumeISO'          => 'Volumen',
+    'SHOP_MODULE_sYellowCubeVolumeISO_CMQ'      =>  'Kubik-Centimeter [cm3]',
+    'SHOP_MODULE_sYellowCubeVolumeISO_MTQ'      =>  'Kubik-Meter [m3]',
+    'SHOP_MODULE_sYellowCubeVolumeISO_MMQ'      =>  'Kubik-Millimeter [mm3]',
+
+    'SHOP_MODULE_sYellowCubeDocType'            =>  'Typ des Lieferbeleges',
+    'SHOP_MODULE_sYellowCubeDocType_LS'	        =>  'Lieferschein',
+    'SHOP_MODULE_sYellowCubeDocType_BL'     	=>	'Bulletin/Bordereau de livraison',
+    'SHOP_MODULE_sYellowCubeDocType_BC'	        =>	'Bolla di Consegna',
+    'SHOP_MODULE_sYellowCubeDocType_DN'	        =>	'Delivery note',
+    'SHOP_MODULE_sYellowCubeDocType_IV'	        =>	'Invoice',
+    'SHOP_MODULE_sYellowCubeDocType_RG'	        =>	'Rechnung',
+    'SHOP_MODULE_sYellowCubeDocType_FA'	        =>	'Facture/Fatura',
+    'SHOP_MODULE_sYellowCubeDocType_ZS'	        =>	'Zahlschein',
+    'SHOP_MODULE_sYellowCubeDocType_BP'	        =>	'Bulletin de payement',
+    'SHOP_MODULE_sYellowCubeDocType_BV'	        =>	'bollettino di versamento',
+    'SHOP_MODULE_sYellowCubeDocType_PF'	        =>	'Payment form',
+
+    'SHOP_MODULE_sYellowCubeDocMimeType'        =>  'Document MIME Type',
+    'SHOP_MODULE_sYellowCubeDocMimeType_pdf'	=>  'pdf',
+    'SHOP_MODULE_sYellowCubeDocMimeType_pcl'	=>	'pcl',
+    'HELP_SHOP_MODULE_sYellowCubeDocMimeType'   =>  'MIME-Typ als Extention des Lieferbeleges. [pdf|pcl] Inhalt des Streams muss mit der Extention übereinstimmen.',
+
+    'SHOP_MODULE_blYellowCubeIgnoreLotInfo'      => 'Ignore YCLot and LOT fields in Article information?',
+    'SHOP_MODULE_blYellowCubeDocDelete'          => 'Delete Order document after uploading?',
+    'SHOP_MODULE_blYellowCubeUsePhoneAndFax'     => 'Include Phone/Fax details in order?',
+    'SHOP_MODULE_blYellowCubeOrderManualSend'     => 'Manually send Order to Yellowcube?',
+    'HELP_SHOP_MODULE_sYellowCubeOrderManualSend'=> 'If enabled allows sending of Order to YellowCube. Otherwise the order is sent immediately after Order is completed.',
+
+    'SHOP_MODULE_sYellowCubeOrderDocumentsFlag'       => 'Entscheid: Ausliefer-Dokumente werden mitgeliefert.',
+    'SHOP_MODULE_sYellowCubeOrderDocumentsFlag_1'     => 'Ja',
+    'SHOP_MODULE_sYellowCubeOrderDocumentsFlag_0'     => 'Nein',
+    'HELP_SHOP_MODULE_sYellowCubeOrderDocumentsFlag'  => 'Ja = Dokument liegt vor und muss in Sendung mitgeliefert werden.<br>Nein = es liegen keine Lieferdokumente vor.',
+
+    // main/overview section
+    'ASIGN_OVERVIEW_ADDITIONAL' => 'Additional Information...',
+    'ASIGN_INVENTORY_UPDATE'    => 'Update Inventory Information...',
+    'ASIGN_INVENTORY_UPDATEDLAST'               => 'Last Update received on',
+    'ASIGN_COLUMN_YCARTICLENO'  => 'YCArticle Nr.',
+    'ASIGN_COLUMN_SHOPID'       => 'Shop Name.',
+    'ASIGN_COLUMN_ARTICLENO'    => 'Article Nr.',
+    'ASIGN_COLUMN_ARTICLEDESC'  => 'Description',
+    'ASIGN_COLUMN_PLANT'        => 'Plant',
+    'ASIGN_COLUMN_STORAGELOC'   => 'Storage Location',
+    'ASIGN_COLUMN_STOCKTYPE'    => 'Stock Type',
+    'ASIGN_COLUMN_QUANTITYISO'  => 'Qty. ISO',
+    'ASIGN_COLUMN_QUANTITYUOM'  => 'Qty. UOM',
+    'ASIGN_COLUMN_TIMESTAMP'    => 'Timestamp',
+    'ASIGN_LABEL_INSERTARTICLE' => 'Send to Yellowcube',
+    'ASIGN_LABEL_INSERTARTICLE_STATUS'          => 'Yellocube Article Status',
+    'ASIGN_MESSAGE_LAST_UPDATE_ON'              => '<strong>Success:</strong> Latest Yellowcube Inventory received on.',
+    'ASIGN_MESSAGE_YCITEM_INSERTED'             => '<strong>Success:</strong> Item inserted into Yellowcube Master data.',
+    'ASIGN_MESSAGE_YCITEM_UPDATED'              => '<strong>Success:</strong> New status updated for selected Article.',
+    'ASIGN_MESSAGE_YCITEM_INSERTED_FAILED'      => '<strong>Warning:</strong> Failed to insert Item into Yellowcube Master data!! Check Error Logs for more information...',
+    'ASIGN_MESSAGE_YCITEM_UPDATED_FAILED'       => '<strong>Warning:</strong> Failed to update status for selected Article!! Check Error Logs for more information...',
+    'ASIGN_LABEL_CREATEORDER'                   => 'Create Yellowcube Customer Order',
+    'ASIGN_LABEL_CREATEORDER_STATUS'            => 'Yellowcube Customer Order Status',
+    'ASIGN_LABEL_CREATEORDER_REPLY'             => 'Yellowcube Customer Order Reply',
+    'ASIGN_LABEL_CREATEORDER_RESPONSE'          => 'Response from Yellowcube',
+    'ASIGN_LABEL_RETURN_RESPONSE'               => 'Return response from Yellowcube',
+    'ASIGN_MESSAGE_YCORDER_CREATED'             => '<strong>Success:</strong> Yellowcube customer order successfully created.',
+    'ASIGN_MESSAGE_YCORDER_UPDATED'             => '<strong>Success:</strong> Yellowcube customer order updated to database successfully.',
+    'ASIGN_MESSAGE_YCORDER_CREATED_FAILED'      => '<strong>Warning:</strong> Failed to create Yellowcube order!! Check Error Logs for more information...',
+    'ASIGN_MESSAGE_YCORDER_UPDATED_FAILED'      => '<strong>Warning:</strong> Failed to get updated response. Possible reason: Wrong order reference number or Order not yet processed.',
+    'ASIGN_MESSAGE_WRONG_FILE_FORMAT'           => '<strong>Warning:</strong> File format uploaded in not PDF format.',
+    'ASIGN_YCSPDETAILS_SAVED_OK'=> '<strong>Success:</strong> Additional Article details saved for this article.',
+    'ASIGN_MESSAGE_YCRETURN_CREATED'            => '<strong>Success:</strong> Order return request sent to Yellowcube.',
+    'ASIGN_OVERVIEW_INVENTORY_MESSAGE'          => 'T&auml;glich wird das Inventar aus dem Warenwirtschaftssystem von YellowCube extrahiert und steht in der aktuellsten Version zu Abfrage online zur Verfügung. Nur das aktuelle Inventar des Tages ist abrufbar.',
+    'ASIGN_OVERVIEW_INVENTORY_MESSAGE_1'        => 'To get latest updates from Yellowcube Inventory click below button...',
+    'ASIGN_MESSAGE_ZIPCODE_MISMATCH'            => 'Zip code format is not matching as per your country.',
+    'ASIGN_MESSAGE_ZIPCODE_INVALID'             => 'Zip code is not valid. Contains invalid characters.',
+    'ASIGN_MESSAGE_MANUAL_MODE_OFF'             => '<strong>Notice:</strong> Manual mode is deactivated for Order sending process. This mode can be activated under Module Settings > Order Information > Manually send Order to Yellowcube?',
+    'ASIGN_LABEL_BASEOUM'       => 'Basismengeneinheit',
+    'ASIGN_LABEL_OPERATINGMODE' => 'Operating Mode',
+    'ASIGN_DOWNLOADABLE_PRODUCT_DETECTED' => 'Select product is set as Downloadable product under "Downloads" tab. This product will not be sent to YellowCube.',
+
+    // buttons/options
+    'ASIGN_YCARTICLES_OPTION_U' => 'Update this article',
+    'ASIGN_YCARTICLES_OPTION_I' => 'Insert this article',
+    'ASIGN_YCARTICLES_OPTION_D' => 'Deactivate this article',
+    'ASIGN_YCARTICLES_BUTTON_INSERT'            => 'Send Yellowcube article',
+    'ASIGN_YCARTICLES_BUTTON_CREATE'            => 'Send Yellowcube Order',
+    'ASIGN_YCARTICLES_BUTTON_RETURN'            => 'Send Return Request',
+    'ASIGN_YCARTICLES_BUTTON_STATUS'            => 'Get Current Status',
+    'ASIGN_YCARTICLES_BUTTON_REFRESH'           => 'Update Now',
+    'ASIGN_YCARTICLES_BUTTON_SAVE'              => 'Save information',
+    'ASIGN_YCORDERS_ORDER_PDF'  => 'PDF order overview document',
+    'ASIGN_YCORDERS_BUTTON_REPLY'               => 'Get Order Reply',
+    'ASIGN_YCORDERS_BUTTON_STATUS'              => 'Get Order Status',
+
+    // OPTIONS
+    'ASIGN_OPTION_PCE'          =>  'Stück (Piece)',
+    'ASIGN_OPTION_PK'           =>  'Paket (Parcel) evtl. Multipack',
+    'ASIGN_OPTION_BG'           =>  'Bag (Beutel/Tüte)',
+    'ASIGN_OPTION_CA'           =>  'Kanister/Dose',
+    'ASIGN_OPTION_CT'           =>  'KAR-Karton 2. Stufe (EH2)',
+    'ASIGN_OPTION_PF'           =>  'AL-Palette 3. Stufe (EH3)',
+    'ASIGN_OPTION_CMT'          =>  'Centimeter',
+    'ASIGN_OPTION_MTR'          =>  'Meter',
+    'ASIGN_OPTION_MMT'          =>  'Millimeter',
+    'ASIGN_OPTION_CMQ'          =>  'Kubik-Centimeter [cm3]',
+    'ASIGN_OPTION_MTQ'          =>  'Kubik-Meter [m3]',
+    'ASIGN_OPTION_MMQ'          =>  'Kubik-Millimeter [mm3]',
+    'ASIGN_OPTION_GRM'          =>  'Gramm [gr]',
+    'ASIGN_OPTION_KGM'          =>  'Kilogramm [kg]',
+    'ASIGN_OPTION_E5'	        =>  'Frische-EAN, var. Gew., ind. ArtNr 5st.',
+    'ASIGN_OPTION_EA'	        =>	'Frische-EAN, var. Pr., ind. ArtNr 4stlg.',
+    'ASIGN_OPTION_HE'	        =>	'Hersteller-EAN',
+    'ASIGN_OPTION_HK'	        =>	'Hersteller-Kurz-EAN',
+    'ASIGN_OPTION_I6'	        =>	'ITF-Code - 16stellig',
+    'ASIGN_OPTION_IC'	        =>	'ITF-Code',
+    'ASIGN_OPTION_IE'	        =>	'Instore-EAN (int. Vergabe mögl.)',
+    'ASIGN_OPTION_IK'	        =>	'Instore-Kurz-EAN (int. Vergabe mögl.)',
+    'ASIGN_OPTION_SA'	        =>	'Frische-EAN, var. Preis, SAN',
+    'ASIGN_OPTION_SG'	        =>	'Frische-EAN, var. Preis, SAN + Gebindez.',
+    'ASIGN_OPTION_UC'	        =>	'UPC-Code',
+    'ASIGN_OPTION_VC'	        =>	'Velocity-Code (int. Vergabe mögl.)',
+);
+
+/*
+[{ oxmultilang ident="GENERAL_YOUWANTTODELETE" }]
+*/
+

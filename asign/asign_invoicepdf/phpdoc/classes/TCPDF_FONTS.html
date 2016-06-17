@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">100</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1786423399"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1786423399" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/cn22labelpdfblock.html">cn22labelpdfblock</a></li>
+                                                    <li class="class"><a href="../classes/Datamatrix.html">Datamatrix</a></li>
+                                                    <li class="class"><a href="../classes/InvoiceOxpdf.html">InvoiceOxpdf</a></li>
+                                                    <li class="class"><a href="../classes/InvoicepdfArticleSummary.html">InvoicepdfArticleSummary</a></li>
+                                                    <li class="class"><a href="../classes/InvoicepdfBlock.html">InvoicepdfBlock</a></li>
+                                                    <li class="class"><a href="../classes/InvoicepdfOrder_Overview.html">InvoicepdfOrder_Overview</a></li>
+                                                    <li class="class"><a href="../classes/InvoicepdfOxOrder.html">InvoicepdfOxOrder</a></li>
+                                                    <li class="class"><a href="../classes/InvoicepdfThankyou.html">InvoicepdfThankyou</a></li>
+                                                    <li class="class"><a href="../classes/oxPDF.html">oxPDF</a></li>
+                                                    <li class="class"><a href="../classes/PDF417.html">PDF417</a></li>
+                                                    <li class="class"><a href="../classes/QRcode.html">QRcode</a></li>
+                                                    <li class="class"><a href="../classes/TCPDF.html">TCPDF</a></li>
+                                                    <li class="class"><a href="../classes/TCPDF2DBarcode.html">TCPDF2DBarcode</a></li>
+                                                    <li class="class"><a href="../classes/TCPDF_COLORS.html">TCPDF_COLORS</a></li>
+                                                    <li class="class"><a href="../classes/TCPDF_FILTERS.html">TCPDF_FILTERS</a></li>
+                                                    <li class="class"><a href="../classes/TCPDF_FONT_DATA.html">TCPDF_FONT_DATA</a></li>
+                                                    <li class="class"><a href="../classes/TCPDF_FONTS.html">TCPDF_FONTS</a></li>
+                                                    <li class="class"><a href="../classes/TCPDF_IMAGES.html">TCPDF_IMAGES</a></li>
+                                                    <li class="class"><a href="../classes/TCPDF_IMPORT.html">TCPDF_IMPORT</a></li>
+                                                    <li class="class"><a href="../classes/TCPDF_PARSER.html">TCPDF_PARSER</a></li>
+                                                    <li class="class"><a href="../classes/TCPDF_STATIC.html">TCPDF_STATIC</a></li>
+                                                    <li class="class"><a href="../classes/TCPDFBarcode.html">TCPDFBarcode</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>TCPDF_FONTS</h1>
+                    <p><em></em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_addTTFfont" class="">addTTFfont()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method__getTTFtableChecksum" class="">_getTTFtableChecksum()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method__getTrueTypeFontSubset" class="">_getTrueTypeFontSubset()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method__putfontwidths" class="">_putfontwidths()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_unichr" class="">unichr()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_unichrUnicode" class="">unichrUnicode()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_unichrASCII" class="">unichrASCII()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_arrUTF8ToUTF16BE" class="">arrUTF8ToUTF16BE()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_UTF8ArrayToUniArray" class="">UTF8ArrayToUniArray()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_UTF8ArrSubString" class="">UTF8ArrSubString()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_UniArrSubString" class="">UniArrSubString()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_updateCIDtoGIDmap" class="">updateCIDtoGIDmap()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method__getfontpath" class="">_getfontpath()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_getFontFullPath" class="">getFontFullPath()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_UTF8ArrToLatin1Arr" class="">UTF8ArrToLatin1Arr()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_UTF8ArrToLatin1" class="">UTF8ArrToLatin1()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_uniord" class="">uniord()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_getUniord" class="">getUniord()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_UTF8StringToArray" class="">UTF8StringToArray()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_UTF8ToLatin1" class="">UTF8ToLatin1()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_UTF8ToUTF16BE" class="">UTF8ToUTF16BE()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_utf8StrRev" class="">utf8StrRev()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_utf8StrArrRev" class="">utf8StrArrRev()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_utf8Bidi" class="">utf8Bidi()</a><br />
+                                                                    <a href="../classes/TCPDF_FONTS.html#method_getFontRefSize" class="">getFontRefSize()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/TCPDF_FONTS.html#property_cache_uniord" class="">$cache_uniord</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/lib.tcpdf.include.tcpdf_fonts.html"><div class="path-wrapper">lib/tcpdf/include/tcpdf_fonts.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">com.tecnick.tcpdf</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\TCPDF_FONTS</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                class
+                            </th>
+                            <td>
+                                                                    <p>TCPDF_FONTS
+Font methods for TCPDF library.</p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                version
+                            </th>
+                            <td>
+                                                                    
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Nicola Asuni - info@tecnick.com</p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_cache_uniord" name="property_cache_uniord" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$cache_uniord</h3>
+                <pre class="signature">$cache_uniord : </pre>
+                <p><em>Static cache used for speed up uniord performances</em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            protected
+                        </th>
+                        <td>
+                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addTTFfont" name="method_addTTFfont" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addTTFfont()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addTTFfont(  <span class="argument">$fontfile</span>,   <span class="argument">$fonttype = &#039;&#039;</span>,   <span class="argument">$enc = &#039;&#039;</span>,   <span class="argument">$flags = 32</span>,   <span class="argument">$outpath = &#039;&#039;</span>,   <span class="argument">$platid = 3</span>,   <span class="argument">$encid = 1</span>,   <span class="argument">$addcbbox = false</span>,   <span class="argument">$link = false</span>) : \(string)</pre>
+                <p><em>Convert and add the selected TrueType or Type1 font to the fonts folder (that must be writeable).</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$fontfile </td>
+                                <td><p>(string) Font file (full path).</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$fonttype </td>
+                                <td><p>(string) Font type. Leave empty for autodetect mode. Valid values are: TrueTypeUnicode, TrueType, Type1, CID0JP = CID-0 Japanese, CID0KR = CID-0 Korean, CID0CS = CID-0 Chinese Simplified, CID0CT = CID-0 Chinese Traditional.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$enc </td>
+                                <td><p>(string) Name of the encoding table to use. Leave empty for default mode. Omit this parameter for TrueType Unicode and symbolic fonts like Symbol or ZapfDingBats.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$flags </td>
+                                <td><p>(int) Unsigned 32-bit integer containing flags specifying various characteristics of the font (PDF32000:2008 - 9.8.2 Font Descriptor Flags): +1 for fixed font; +4 for symbol or +32 for non-symbol; +64 for italic. Fixed and Italic mode are generally autodetected so you have to set it to 32 = non-symbolic font (default) or 4 = symbolic font.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$outpath </td>
+                                <td><p>(string) Output path for generated font files (must be writeable by the web server). Leave empty for default font folder.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$platid </td>
+                                <td><p>(int) Platform ID for CMAP table to extract (when building a Unicode font for Windows this value should be 3, for Macintosh should be 1).</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$encid </td>
+                                <td><p>(int) Encoding ID for CMAP table to extract (when building a Unicode font for Windows this value should be 1, for Macintosh should be 0). When Platform ID is 3, legal values for Encoding ID are: 0=Symbol, 1=Unicode, 2=ShiftJIS, 3=PRC, 4=Big5, 5=Wansung, 6=Johab, 7=Reserved, 8=Reserved, 9=Reserved, 10=UCS-4.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$addcbbox </td>
+                                <td><p>(boolean) If true includes the character bounding box information on the php font file.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$link </td>
+                                <td><p>(boolean) If true link to system font instead of copying the font data (not transportable) - Note: do not work with Type1 fonts.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \(string)
+                                            &mdash; <p>TCPDF font name or boolean false in case of error.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            5.9.123                                <p>(2010-09-30)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__getTTFtableChecksum" name="method__getTTFtableChecksum" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">_getTTFtableChecksum()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_getTTFtableChecksum(  <span class="argument">$table</span>,   <span class="argument">$length</span>) : integer</pre>
+                <p><em>Returs the checksum of a TTF table.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$table </td>
+                                <td><p>(string) table to check</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$length </td>
+                                <td><p>(int) length of table in bytes</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>checksum</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            5.2.000                                <p>(2010-06-02)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__getTrueTypeFontSubset" name="method__getTrueTypeFontSubset" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">_getTrueTypeFontSubset()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_getTrueTypeFontSubset(  <span class="argument">$font</span>,   <span class="argument">$subsetchars</span>) : \(string)</pre>
+                <p><em>Returns a subset of the TrueType font data without the unused glyphs.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$font </td>
+                                <td><p>(string) TrueType font data.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$subsetchars </td>
+                                <td><p>(array) Array of used characters (the glyphs to keep).</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \(string)
+                                            &mdash; <p>A subset of TrueType font data without the unused glyphs.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            5.2.000                                <p>(2010-06-02)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__putfontwidths" name="method__putfontwidths" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">_putfontwidths()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_putfontwidths(  <span class="argument">$font</span>,   <span class="argument">$cidoffset</span>) : \PDF</pre>
+                <p><em>Outputs font widths</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$font </td>
+                                <td><p>(array) font data</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$cidoffset </td>
+                                <td><p>(int) offset for CID values</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \PDF
+                                            &mdash; <p>command string for font widths</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            4.4.000                                <p>(2008-12-07)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_unichr" name="method_unichr" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">unichr()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">unichr(  <span class="argument">$c</span>,   <span class="argument">$unicode = true</span>) : \Returns</pre>
+                <p><em>Returns the unicode caracter specified by the value</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$c </td>
+                                <td><p>(int) UTF-8 value</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$unicode </td>
+                                <td><p>(boolean) True if we are in unicode mode, false otherwise.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Returns
+                                            &mdash; <p>the specified character.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            2.3.000                                <p>(2008-03-05)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_unichrUnicode" name="method_unichrUnicode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">unichrUnicode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">unichrUnicode(  <span class="argument">$c</span>) : \Returns</pre>
+                <p><em>Returns the unicode caracter specified by UTF-8 value</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$c </td>
+                                <td><p>(int) UTF-8 value</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Returns
+                                            &mdash; <p>the specified character.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_unichrASCII" name="method_unichrASCII" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">unichrASCII()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">unichrASCII(  <span class="argument">$c</span>) : \Returns</pre>
+                <p><em>Returns the unicode caracter specified by ASCII value</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$c </td>
+                                <td><p>(int) UTF-8 value</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Returns
+                                            &mdash; <p>the specified character.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_arrUTF8ToUTF16BE" name="method_arrUTF8ToUTF16BE" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">arrUTF8ToUTF16BE()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">arrUTF8ToUTF16BE(  <span class="argument">$unicode</span>,   <span class="argument">$setbom = false</span>) : string</pre>
+                <p><em>Converts array of UTF-8 characters to UTF16-BE string.&lt;br&gt;
+Based on: http://www.faqs.org/rfcs/rfc2781.html
+&lt;pre&gt;
+  Encoding UTF-16:</em></p>
+                <p>Encoding of a single character from an ISO 10646 character value to
+UTF-16 proceeds as follows. Let U be the character number, no greater
+than 0x10FFFF.</p>
+<p>1) If U &lt; 0x10000, encode U as a 16-bit unsigned integer and
+terminate.</p>
+<p>2) Let U' = U - 0x10000. Because U is less than or equal to 0x10FFFF,
+U' must be less than or equal to 0xFFFFF. That is, U' can be
+represented in 20 bits.</p>
+<p>3) Initialize two 16-bit unsigned integers, W1 and W2, to 0xD800 and
+0xDC00, respectively. These integers each have 10 bits free to
+encode the character value, for a total of 20 bits.</p>
+<p>4) Assign the 10 high-order bits of the 20-bit U' to the 10 low-order
+bits of W1 and the 10 low-order bits of U' to the 10 low-order
+bits of W2. Terminate.</p>
+<p>Graphically, steps 2 through 4 look like:
+U' = yyyyyyyyyyxxxxxxxxxx
+W1 = 110110yyyyyyyyyy
+W2 = 110111xxxxxxxxxx
+</pre></p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$unicode </td>
+                                <td><p>(array) array containing UTF-8 unicode values</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$setbom </td>
+                                <td><p>(boolean) if true set the Byte Order Mark (BOM = 0xFEFF)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            protected
+                        </th>
+                        <td>
+                                                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            2.1.000                                <p>(2008-01-08)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_UTF8ArrayToUniArray" name="method_UTF8ArrayToUniArray" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">UTF8ArrayToUniArray()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">UTF8ArrayToUniArray(  <span class="argument">$ta</span>,   <span class="argument">$isunicode = true</span>) : \Return</pre>
+                <p><em>Convert an array of UTF8 values to array of unicode characters</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$ta </td>
+                                <td><p>(array) The input array of UTF8 values.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$isunicode </td>
+                                <td><p>(boolean) True for Unicode mode, false otherwise.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Return
+                                            &mdash; <p>array of unicode characters</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            4.5.037                                <p>(2009-04-07)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_UTF8ArrSubString" name="method_UTF8ArrSubString" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">UTF8ArrSubString()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">UTF8ArrSubString(  <span class="argument">$strarr</span>,   <span class="argument">$start = &#039;&#039;</span>,   <span class="argument">$end = &#039;&#039;</span>,   <span class="argument">$unicode = true</span>) : \Return</pre>
+                <p><em>Extract a slice of the $strarr array and return it as string.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$strarr </td>
+                                <td><p>(string) The input array of characters.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$start </td>
+                                <td><p>(int) the starting element of $strarr.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$end </td>
+                                <td><p>(int) first element that will not be returned.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$unicode </td>
+                                <td><p>(boolean) True if we are in unicode mode, false otherwise.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Return
+                                            &mdash; <p>part of a string</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_UniArrSubString" name="method_UniArrSubString" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">UniArrSubString()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">UniArrSubString(  <span class="argument">$uniarr</span>,   <span class="argument">$start = &#039;&#039;</span>,   <span class="argument">$end = &#039;&#039;</span>) : \Return</pre>
+                <p><em>Extract a slice of the $uniarr array and return it as string.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$uniarr </td>
+                                <td><p>(string) The input array of characters.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$start </td>
+                                <td><p>(int) the starting element of $strarr.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$end </td>
+                                <td><p>(int) first element that will not be returned.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Return
+                                            &mdash; <p>part of a string</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            4.5.037                                <p>(2009-04-07)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_updateCIDtoGIDmap" name="method_updateCIDtoGIDmap" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">updateCIDtoGIDmap()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">updateCIDtoGIDmap(  <span class="argument">$map</span>,   <span class="argument">$cid</span>,   <span class="argument">$gid</span>) : \(string)</pre>
+                <p><em>Update the CIDToGIDMap string with a new value.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$map </td>
+                                <td><p>(string) CIDToGIDMap.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$cid </td>
+                                <td><p>(int) CID value.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$gid </td>
+                                <td><p>(int) GID value.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \(string)
+                                            &mdash; <p>CIDToGIDMap.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            5.9.123                                <p>(2011-09-29)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__getfontpath" name="method__getfontpath" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">_getfontpath()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_getfontpath() : string</pre>
+                <p><em>Return fonts path</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFontFullPath" name="method_getFontFullPath" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFontFullPath()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFontFullPath(  <span class="argument">$file</span>,   <span class="argument">$fontdir = false</span>) : string</pre>
+                <p><em>Return font full path</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$file </td>
+                                <td><p>(string) Font file name.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$fontdir </td>
+                                <td><p>(string) Font directory (set to false fto search on default directories)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Font full path or empty string</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            6.0.025                                
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_UTF8ArrToLatin1Arr" name="method_UTF8ArrToLatin1Arr" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">UTF8ArrToLatin1Arr()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">UTF8ArrToLatin1Arr(  <span class="argument">$unicode</span>) : array</pre>
+                <p><em>Converts UTF-8 characters array to array of Latin1 characters array&lt;br&gt;</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$unicode </td>
+                                <td><p>(array) array containing UTF-8 unicode values</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            4.8.023                                <p>(2010-01-15)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_UTF8ArrToLatin1" name="method_UTF8ArrToLatin1" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">UTF8ArrToLatin1()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">UTF8ArrToLatin1(  <span class="argument">$unicode</span>) : array</pre>
+                <p><em>Converts UTF-8 characters array to array of Latin1 string&lt;br&gt;</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$unicode </td>
+                                <td><p>(array) array containing UTF-8 unicode values</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            4.8.023                                <p>(2010-01-15)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_uniord" name="method_uniord" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">uniord()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">uniord(  <span class="argument">$uch</span>) : integer</pre>
+                <p><em>Converts UTF-8 character to integer value.&lt;br&gt;
+Uses the getUniord() method if the value is not cached.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$uch </td>
+                                <td><p>(string) character string to process.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>Unicode value</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getUniord" name="method_getUniord" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getUniord()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getUniord(  <span class="argument">$uch</span>) : integer</pre>
+                <p><em>Converts UTF-8 character to integer value.&lt;br&gt;
+Invalid byte sequences will be replaced with 0xFFFD (replacement character)&lt;br&gt;
+Based on: http://www.faqs.org/rfcs/rfc3629.html
+&lt;pre&gt;
+   Char. number range  |        UTF-8 octet sequence
+      (hexadecimal)    |              (binary)
+   --------------------+-----------------------------------------------
+   0000 0000-0000 007F | 0xxxxxxx
+   0000 0080-0000 07FF | 110xxxxx 10xxxxxx
+   0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
+   0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+   ---------------------------------------------------------------------</em></p>
+                <h2>ABFN notation:</h2>
+<p>UTF8-octets = *( UTF8-char )
+UTF8-char   = UTF8-1 / UTF8-2 / UTF8-3 / UTF8-4
+UTF8-1      = %x00-7F
+UTF8-2      = %xC2-DF UTF8-tail</p>
+<h2>UTF8-3      = %xE0 %xA0-BF UTF8-tail / %xE1-EC 2( UTF8-tail ) /
+%xED %x80-9F UTF8-tail / %xEE-EF 2( UTF8-tail )
+UTF8-4      = %xF0 %x90-BF 2( UTF8-tail ) / %xF1-F3 3( UTF8-tail ) /
+%xF4 %x80-8F 2( UTF8-tail )
+UTF8-tail   = %x80-BF</h2>
+<p></pre></p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$uch </td>
+                                <td><p>(string) character string to process.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>Unicode value</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_UTF8StringToArray" name="method_UTF8StringToArray" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">UTF8StringToArray()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">UTF8StringToArray(  <span class="argument">$str</span>,   <span class="argument">$isunicode = true</span>,   <span class="argument">$currentfont</span>) : array</pre>
+                <p><em>Converts UTF-8 strings to codepoints array.&lt;br&gt;
+Invalid byte sequences will be replaced with 0xFFFD (replacement character)&lt;br&gt;</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$str </td>
+                                <td><p>(string) string to process.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$isunicode </td>
+                                <td><p>(boolean) True when the documetn is in Unicode mode, false otherwise.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$currentfont </td>
+                                <td><p>(array) Reference to current font array.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>containing codepoints (UTF-8 characters values)</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_UTF8ToLatin1" name="method_UTF8ToLatin1" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">UTF8ToLatin1()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">UTF8ToLatin1(  <span class="argument">$str</span>,   <span class="argument">$isunicode = true</span>,   <span class="argument">$currentfont</span>) : string</pre>
+                <p><em>Converts UTF-8 strings to Latin1 when using the standard 14 core fonts.&lt;br&gt;</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$str </td>
+                                <td><p>(string) string to process.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$isunicode </td>
+                                <td><p>(boolean) True when the documetn is in Unicode mode, false otherwise.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$currentfont </td>
+                                <td><p>(array) Reference to current font array.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            3.2.000                                <p>(2008-06-23)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_UTF8ToUTF16BE" name="method_UTF8ToUTF16BE" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">UTF8ToUTF16BE()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">UTF8ToUTF16BE(  <span class="argument">$str</span>,   <span class="argument">$setbom = false</span>,   <span class="argument">$isunicode = true</span>,   <span class="argument">$currentfont</span>) : string</pre>
+                <p><em>Converts UTF-8 strings to UTF16-BE.&lt;br&gt;</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$str </td>
+                                <td><p>(string) string to process.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$setbom </td>
+                                <td><p>(boolean) if true set the Byte Order Mark (BOM = 0xFEFF)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$isunicode </td>
+                                <td><p>(boolean) True when the documetn is in Unicode mode, false otherwise.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$currentfont </td>
+                                <td><p>(array) Reference to current font array.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            1.53.0.TC005                                <p>(2005-01-05)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_utf8StrRev" name="method_utf8StrRev" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">utf8StrRev()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">utf8StrRev(  <span class="argument">$str</span>,   <span class="argument">$setbom = false</span>,   <span class="argument">$forcertl = false</span>,   <span class="argument">$isunicode = true</span>,   <span class="argument">$currentfont</span>) : string</pre>
+                <p><em>Reverse the RLT substrings using the Bidirectional Algorithm (http://unicode.org/reports/tr9/).</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$str </td>
+                                <td><p>(string) string to manipulate.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$setbom </td>
+                                <td><p>(bool) if true set the Byte Order Mark (BOM = 0xFEFF)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$forcertl </td>
+                                <td><p>(bool) if true forces RTL text direction</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$isunicode </td>
+                                <td><p>(boolean) True if the document is in Unicode mode, false otherwise.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$currentfont </td>
+                                <td><p>(array) Reference to current font array.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            2.1.000                                <p>(2008-01-08)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_utf8StrArrRev" name="method_utf8StrArrRev" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">utf8StrArrRev()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">utf8StrArrRev(  <span class="argument">$arr</span>,   <span class="argument">$str = &#039;&#039;</span>,   <span class="argument">$setbom = false</span>,   <span class="argument">$forcertl = false</span>,   <span class="argument">$isunicode = true</span>,   <span class="argument">$currentfont</span>) : string</pre>
+                <p><em>Reverse the RLT substrings array using the Bidirectional Algorithm (http://unicode.org/reports/tr9/).</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$arr </td>
+                                <td><p>(array) array of unicode values.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$str </td>
+                                <td><p>(string) string to manipulate (or empty value).</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$setbom </td>
+                                <td><p>(bool) if true set the Byte Order Mark (BOM = 0xFEFF)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$forcertl </td>
+                                <td><p>(bool) if true forces RTL text direction</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$isunicode </td>
+                                <td><p>(boolean) True if the document is in Unicode mode, false otherwise.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$currentfont </td>
+                                <td><p>(array) Reference to current font array.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            4.9.000                                <p>(2010-03-27)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_utf8Bidi" name="method_utf8Bidi" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">utf8Bidi()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">utf8Bidi(  <span class="argument">$ta</span>,   <span class="argument">$str = &#039;&#039;</span>,   <span class="argument">$forcertl = false</span>,   <span class="argument">$isunicode = true</span>,   <span class="argument">$currentfont</span>) : array</pre>
+                <p><em>Reverse the RLT substrings using the Bidirectional Algorithm (http://unicode.org/reports/tr9/).</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$ta </td>
+                                <td><p>(array) array of characters composing the string.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$str </td>
+                                <td><p>(string) string to process</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$forcertl </td>
+                                <td><p>(bool) if 'R' forces RTL, if 'L' forces LTR</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$isunicode </td>
+                                <td><p>(boolean) True if the document is in Unicode mode, false otherwise.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$currentfont </td>
+                                <td><p>(array) Reference to current font array.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>of unicode chars</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            author
+                        </th>
+                        <td>
+                                                                                            <p>Nicola Asuni</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            2.4.000                                <p>(2008-03-06)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFontRefSize" name="method_getFontRefSize" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFontRefSize()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFontRefSize(  <span class="argument">$size</span>,   <span class="argument">$refsize = 12</span>) : float</pre>
+                <p><em>Get a reference font size.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$size </td>
+                                <td><p>(string) String containing font size value.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$refsize </td>
+                                <td><p>(float) Reference font size in points.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    float
+                                            &mdash; <p>value in points</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            public
+                        </th>
+                        <td>
+                                                                                            <p>static</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">tcpdf_fonts.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/lib/tcpdf/include/tcpdf_fonts.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on June 8th, 2016 at 14:46.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

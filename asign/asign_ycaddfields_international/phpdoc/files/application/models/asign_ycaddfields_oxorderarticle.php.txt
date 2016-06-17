@@ -1,0 +1,41 @@
+<?php
+/**
+ * Extends oxorderarticle to add more data fields in order completion for PDF generation
+ * @category asign
+ * @package  A-asign_ycaddfields_international
+ * @author   Johannes Rebhan A-SIGN GmbH 2015 - rebhan@a-sign.ch
+ * @link     http://www.a-sign.ch
+ */
+
+class asign_ycaddfields_oxorderarticle extends asign_ycaddfields_oxorderarticle_parent{
+
+    /**
+     * Overloads save to store additional fields when the article data is stored in orderarticle table
+     *
+     * @return bool
+     */
+
+    public function save(){
+
+        $oArticle = $this->getArticle();
+
+        $sArticleTableName = $oArticle->getCoreTableName();
+
+        $sSourceFieldNameCustoms = $sArticleTableName . '__' . asign_ycaddfields_db::CUSTOMS;
+        $sSourceFieldNameTara = $sArticleTableName . '__' . asign_ycaddfields_db::TARA;
+        $sSourceFieldNameOrigin = $sArticleTableName . '__' . asign_ycaddfields_db::ORIGIN;
+
+        $sOrderArticleTableName = $this->getCoreTableName();
+
+        $sDestFieldNameCustoms = $sOrderArticleTableName  . '__' . asign_ycaddfields_db::CUSTOMS;
+        $sDestFieldNameTara = $sOrderArticleTableName  . '__' . asign_ycaddfields_db::TARA;
+        $sDestFieldNameOrigin = $sOrderArticleTableName  . '__' . asign_ycaddfields_db::ORIGIN;
+
+        $this->$sDestFieldNameCustoms = clone $oArticle->$sSourceFieldNameCustoms;
+        $this->$sDestFieldNameTara = clone $oArticle->$sSourceFieldNameTara;
+        $this->$sDestFieldNameOrigin = clone $oArticle->$sSourceFieldNameOrigin;
+
+        return parent::save();
+    }
+
+}

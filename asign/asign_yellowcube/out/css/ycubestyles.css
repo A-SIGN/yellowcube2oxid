@@ -1,0 +1,58 @@
+/** Logbox and captbox **/
+div.logBox {
+    min-width: 550px;
+    min-height: 195px;
+    border: 1px solid #CCC;
+    padding: 5px;
+    word-wrap: break-word;
+    overflow-y: auto;
+    margin-right: 10px;
+}
+
+.capBox {
+    min-width: 330px !important;
+}
+
+div.logBox p {
+    margin: 10px 0;
+}
+
+h3.noborder {
+    max-width: 95%;
+}
+
+h3.blockHead {
+    color: #EC6105 !important;
+}
+
+.messagebox {
+    background: none repeat scroll 0 0 #ffe;
+    border: 1px solid gray;
+    color: #000;
+    margin: 1px 0 10px 0;
+}
+
+.errLogBox {
+    border: 1px solid #aaa;
+    padding: 8px;
+    height: 455px;
+    overflow-y: auto;
+}
+
+.failerror {
+    color: #F00000;
+}
+
+.success {
+    color: green;
+}
+
+.errorbox {
+    font-weight: normal !important;
+}
+td.listitem2 {
+    padding: 1px 5px;
+}
+.hideit {
+    display: none;
+}

@@ -1,0 +1,72 @@
+<?php
+/**
+* Handles files.
+*
+* PHP version 5
+* 
+* @category  Asign
+* @package   Asign_Yellowcube_V_EE
+* @author    Asign <entwicklung@a-sign.ch>
+* @copyright asign
+* @license   http://www.a-sign.ch/
+* @version   2.0
+* @link      http://www.a-sign.ch/
+* @see       Asign_Yellowcube_Util
+* @since     File available since Release 2.0
+*/
+
+/**
+* Handles fiels
+* 
+* @category Asign
+* @package  Asign_Yellowcube_V_EE
+* @author   Asign <entwicklung@a-sign.ch>
+* @license  http://www.a-sign.ch/
+* @link     http://www.a-sign.ch
+*/
+class Asign_Yellowcube_Util {
+
+    /**
+     * Generate filenames of orders
+     * 
+     * @param oxOrder $oOrder
+     *
+     * @return mixed|string
+     */
+    public static function genTrimmedFilename(oxOrder $oOrder)
+    {
+        $sTrimmedBillName = trim($oOrder->oxorder__oxbilllname->getRawValue());
+        $sFilename = $oOrder->oxorder__oxordernr->value . "_" . $sTrimmedBillName . ".pdf";
+        $sFilename = asign_yellowcube_util::validateFilename($sFilename);
+
+        return $sFilename;
+    }
+
+    /**
+     * helper function - remove not allowed special character
+     *
+     * @param $sFilename
+     *
+     * @return mixed
+     */
+    public static function validateFilename($sFilename)
+    {
+        $sFilename = preg_replace('/[\s]+/', '_', $sFilename);
+        $sFilename = preg_replace('/[^a-zA-Z0-9_\.-]/', '', $sFilename);
+
+        return str_replace(' ', '_', $sFilename);
+    }
+
+    /**
+     * return delivery settings for sql request.
+     *
+     * @return string - sql string for IN()
+     */
+    public static function _sqlReturnDeliverySettings()
+    {
+        $oConfig = oxRegistry::getConfig();
+        $sSettingDelivery = $oConfig->getConfigParam('sDelTypeYC');
+
+        return $sSettings = "'".implode("','", explode(",", $sSettingDelivery))."'";;
+    }
+}

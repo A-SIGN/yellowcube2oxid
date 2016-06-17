@@ -1,0 +1,102 @@
+<?php
+/**
+* Renders template asign_yellowcube_main.tpl
+*
+* PHP version 5
+* 
+* @category  Asign
+* @package   Asign_Yellowcube_V_EE
+* @author    Asign <entwicklung@a-sign.ch>
+* @copyright asign
+* @license   http://www.a-sign.ch/
+* @version   2.0
+* @link      http://www.a-sign.ch/
+* @see       Asign_YellowCube_Main
+* @since     File available since Release 2.0
+*/
+
+/**
+* Renders template asign_yellowcube_main.tpl
+* 
+* @category Asign
+* @package  Asign_Yellowcube_V_EE
+* @author   Asign <entwicklung@a-sign.ch>
+* @license  http://www.a-sign.ch/
+* @link     http://www.a-sign.ch
+*/
+class Asign_Yellowcube_Main extends oxAdminDetails
+{
+    /**
+     * Executes parent method parent::render(), show the details
+     * for selected object and passed to Smarty engine and returns name of template file
+     * "asign_yellowcube_main.tpl".
+     *
+     * @return string
+     */
+    public function render()
+    {
+        parent::render();
+
+        /** @var string $soxId */
+        $soxId      = $this->getEditObjectId();
+        $this->_aViewData["oxid"] = $soxId;
+        
+        // get the inventory information
+        $oModel = oxNew("asign_yellowcube_model");
+        $this->_aViewData["aInventory"] = $oModel->getInventoryData($soxId);
+        
+        return "asign_yellowcube_main.tpl";
+    }    
+    
+    /**
+     * Executes yellowcube Inventory status
+     *
+     * @return null
+     */
+    public function refresh()
+    {
+        try {
+            $oYCube = oxNew("asign_yellowcubecore");
+            $aResponse = $oYCube->getInventory();
+
+            // update
+            $oModel = oxNew("asign_yellowcube_model");
+            $iCount = $oModel->saveInventoryData($aResponse);
+
+            // if some result then only show message
+            if ($iCount) {
+                $this->_aViewData['blStatus'] = true;
+            }            
+        } catch (Exception $Ex) {
+            oxRegistry::get("oxUtilsView")->addErrorToDisplay(new Exception('[Error: ' . $Ex->getCode() . '] ' . $Ex->getMessage()));
+        }
+
+    }
+    
+    /**
+     * Returns Last updated date for Inventory     
+     * 
+     * @return string
+     */
+    public function getLastUpdateDate()
+    {
+        return $this->getConfig()->getShopConfVar('ycupdlast');
+    } 
+    
+    /**
+     * Returns Stock value meaning
+     *
+     * @param string $iStock Stock value
+     *
+     * @return string
+     */
+    public function getStockText($iStock)
+    {
+        // get the inventory information
+        $oModel = oxNew("asign_yellowcube_model");
+        $sText = $oModel->getStockValueMeaning($iStock);
+        
+        return $sText;
+    } 
+}
+

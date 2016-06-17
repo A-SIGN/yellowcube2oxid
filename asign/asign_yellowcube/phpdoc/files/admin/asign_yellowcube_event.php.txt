@@ -1,0 +1,164 @@
+<?php
+/**
+* This performs actions on activate/deactivate action
+*
+* PHP version 5
+* 
+* @category  Asign
+* @package   Asign_Yellowcube_V_EE
+* @author    Asign <entwicklung@a-sign.ch>
+* @copyright asign
+* @license   http://www.a-sign.ch/
+* @version   2.0
+* @link      http://www.a-sign.ch/
+* @see       Asign_YellowCube_Event
+* @since     File available since Release 2.0
+*/
+
+/**
+* Executes function on activate/deactivate
+* 
+* @category Asign
+* @package  Asign_Yellowcube_V_EE
+* @author   Asign <entwicklung@a-sign.ch>
+* @link     http://www.a-sign.ch
+* @license  http://www.a-sign.ch/
+*/
+
+class Asign_YellowCube_Event extends oxBase
+{
+    /**
+     * Create SQL for running on module Activation and Deactivation
+     *
+     * @return array
+     */        
+    protected static $ycSql = array(
+        'actSql' => array(
+            'crtQuery' => array(
+                "CREATE TABLE IF NOT EXISTS `asign_ycinventory` (
+                  `OXID` CHAR(32) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+                  `OXSHOPID` CHAR(32) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+                  `OXYCARTICLENR` VARCHAR(128) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+                  `OXARTICLENR` VARCHAR(128) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+                  `OXARTDESC` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+                  `OXADDITIONAL` TEXT NOT NULL,
+                  `OXTIMESTAMP` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                  PRIMARY KEY (`OXID`)
+               ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+            "),
+            'insQuery' => array(
+                "INSERT INTO `oxdeliveryset` set `OXID` = 'SPS_ECO', `OXSHOPID` = 1, `OXACTIVE` = 1, `OXTITLE` = 'PostPac Economy', `OXTITLE_1` = 'PostPac Economy (Paket)', `OXTITLE_2` = 'PostPac Economy', `OXPOS` = '100' ON DUPLICATE KEY UPDATE `OXTIMESTAMP` = CURRENT_TIMESTAMP",
+                "INSERT INTO `oxdeliveryset` set `OXID` = 'SPS_ECO_SI', `OXSHOPID` = 1, `OXACTIVE` = 1, `OXTITLE` = 'Postpac Economy mit Unterschrift (SI)', `OXTITLE_1` = 'Postpac Economy mit Unterschrift (SI)', `OXTITLE_2` = 'Postpac Economy mit Unterschrift (SI)', `OXPOS` = '101' ON DUPLICATE KEY UPDATE `OXTIMESTAMP` = CURRENT_TIMESTAMP",
+                "INSERT INTO `oxdeliveryset` set `OXID` = 'SPS_PRI', `OXSHOPID` = 1, `OXACTIVE` = 1, `OXTITLE` = 'Postpac Priority', `OXTITLE_1` = 'Postpac Priority', `OXTITLE_2` = 'Postpac Priority', `OXPOS` = '102' ON DUPLICATE KEY UPDATE `OXTIMESTAMP` = CURRENT_TIMESTAMP",
+                "INSERT INTO `oxdeliveryset` set `OXID` = 'SPS_PRI_SI', `OXSHOPID` = 1, `OXACTIVE` = 1, `OXTITLE` = 'Postpac Priority mit Unterschrift (SI)', `OXTITLE_1` = 'Postpac Priority mit Unterschrift (SI)', `OXTITLE_2` = 'Postpac Priority mit Unterschrift (SI)', `OXPOS` = '102' ON DUPLICATE KEY UPDATE `OXTIMESTAMP` = CURRENT_TIMESTAMP",
+                "INSERT INTO `oxdeliveryset` set `OXID` = 'SPS_PRI_SI;AZ', `OXSHOPID` = 1, `OXACTIVE` = 1, `OXTITLE` = 'Postpac Priority SI Abendzustellung', `OXTITLE_1` = 'Postpac Priority SI Abendzustellung', `OXTITLE_2` = 'Postpac Priority SI Abendzustellung', `OXPOS` = '103' ON DUPLICATE KEY UPDATE `OXTIMESTAMP` = CURRENT_TIMESTAMP",
+                "INSERT INTO `oxdeliveryset` set `OXID` = 'SPS_PRI_SI;SA', `OXSHOPID` = 1, `OXACTIVE` = 1, `OXTITLE` = 'Postpac Priority SI Samstagszustellung', `OXTITLE_1` = 'Postpac Priority SI Samstagszustellung', `OXTITLE_2` = 'Postpac Priority SI Samstagszustellung', `OXPOS` = '104' ON DUPLICATE KEY UPDATE `OXTIMESTAMP` = CURRENT_TIMESTAMP",
+                "INSERT INTO `oxdeliveryset` set `OXID` = 'SPS_PICKUP_APOST', `OXSHOPID` = 1, `OXACTIVE` = 1, `OXTITLE` = 'Abholung A-Post', `OXTITLE_1` = 'Abholung A-Post', `OXTITLE_2` = 'Abholung A-Post', `OXPOS` = '105' ON DUPLICATE KEY UPDATE `OXTIMESTAMP` = CURRENT_TIMESTAMP",
+                "INSERT INTO `oxdeliveryset` set `OXID` = 'SPS_PICKUP_URGENT', `OXSHOPID` = 1, `OXACTIVE` = 1, `OXTITLE` = 'International TNT', `OXTITLE_1` = 'International TNT', `OXTITLE_2` = 'International TNT', `OXPOS` = '106' ON DUPLICATE KEY UPDATE `OXTIMESTAMP` = CURRENT_TIMESTAMP",
+                "INSERT INTO `oxdeliveryset` set `OXID` = 'SPS_INTPRI', `OXSHOPID` = 1, `OXACTIVE` = 1, `OXTITLE` = 'Internationaler Kleinpaket-Brief Priority', `OXTITLE_1` = 'Internationaler Kleinpaket-Brief Priority', `OXTITLE_2` = 'Internationaler Kleinpaket-Brief Priority', `OXPOS` = '107' ON DUPLICATE KEY UPDATE `OXTIMESTAMP` = CURRENT_TIMESTAMP",
+                "INSERT INTO `oxdeliveryset` set `OXID` = 'SPS_INTECO', `OXSHOPID` = 1, `OXACTIVE` = 1, `OXTITLE` = 'Internationaler Kleinpaket-Brief Economy', `OXTITLE_1` = 'Internationaler Kleinpaket-Brief Economy', `OXTITLE_2` = 'Internationaler Kleinpaket-Brief Economy', `OXPOS` = '108' ON DUPLICATE KEY UPDATE `OXTIMESTAMP` = CURRENT_TIMESTAMP",
+                "INSERT INTO `oxdelivery` set `OXID` = 'SPS_INTECO_INTPRI', `OXSHOPID` = 'oxbaseshop', `OXACTIVE` = 1, `OXACTIVEFROM` = '0000-00-00 00:00:00', `OXACTIVETO` = '0000-00-00 00:00:00', `OXTITLE` = 'Kleinpaket International Gewicht', `OXTITLE_1` = 'Kleinpaket International Gewicht', `OXTITLE_2` = 'Kleinpaket International Gewicht', `OXADDSUMTYPE` = 'abs', `OXADDSUM` = 0, `OXDELTYPE` = 'w', `OXPARAM` = 0, `OXPARAMEND` = 1.9, `OXFIXED` =  0, `OXSORT` = 9999, `OXFINALIZE` = 0 ON DUPLICATE KEY UPDATE `OXTIMESTAMP` = CURRENT_TIMESTAMP",
+            ),
+        ),
+    );
+    
+    /**
+     * Alters table on call
+     * 
+     * @return null    
+     */ 
+    public static function onActivate()
+    {
+        self::alterDbTables();
+        self::createYCTable(); 
+        self::insertSPSMethods();
+    }
+    
+    /**
+     * Creates table on call
+     *
+     * @return bool
+     */
+    protected static function createYCTable()
+    {
+        $oDb = oxDb::getDb(true);
+        $cSql = self::$ycSql["actSql"]["crtQuery"];
+        
+        //run the query
+        foreach ($cSql as $query) {
+            $oDb->execute($query);
+        }
+        
+        return true;
+    }
+
+    /**
+     * Adds SPS shipping methods
+     *
+     * @return bool
+     */
+    protected static function insertSPSMethods()
+    {
+        $oDb = oxDb::getDb(true);
+        $cSql = self::$ycSql["actSql"]["insQuery"];
+
+        //run the query
+        foreach ($cSql as $query) {
+            $oDb->execute($query);
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if the column is already present in
+     * specified table. oxMetaDataHandler allows the
+     * checks. If not present then column is added...
+     *
+     * @return bool
+     */
+    protected static function alterDbTables()
+    {
+        try {
+            $oDb = oxDb::getDb();
+            $oMetaData = oxNew('oxDbMetaDataHandler');
+
+            // if ASIGNSPSDETAILS column exists?
+            if (!$oMetaData->fieldExists(strtolower("ASIGNSPSDETAILS"), "oxarticles")) {
+                $oDb->execute("ALTER TABLE `oxarticles` ADD COLUMN `ASIGNSPSDETAILS` TEXT NOT NULL DEFAULT ''");
+            }
+
+            // if ASIGNYCRESPONSE column exists?
+            if (!$oMetaData->fieldExists(strtolower("ASIGNYCRESPONSE"), "oxarticles")) {
+                $oDb->execute("ALTER TABLE `oxarticles` ADD COLUMN `ASIGNYCRESPONSE` TEXT NOT NULL DEFAULT ''");
+            }
+
+            // if ASIGNYCRESPONSE column exists?
+            if (!$oMetaData->fieldExists(strtolower("ASIGNYCRESPONSE"), "oxorder")) {
+                $oDb->execute("ALTER TABLE `oxorder` ADD COLUMN `ASIGNYCRESPONSE` TEXT NOT NULL DEFAULT '' COMMENT 'Initial response after sending with WAB'");
+            }
+
+            // if ASIGNYCWABRESPONSE column exists?
+            if (!$oMetaData->fieldExists(strtolower("ASIGNYCWABRESPONSE"), "oxorder")) {
+                $oDb->execute("ALTER TABLE `oxorder` ADD COLUMN `ASIGNYCWABRESPONSE` TEXT NOT NULL DEFAULT '' COMMENT 'Preresponse using WAB type'");
+            }
+
+            // if ASIGNYCWARRESPONSE column exists?
+            if (!$oMetaData->fieldExists(strtolower("ASIGNYCWARRESPONSE"), "oxorder")) {
+                $oDb->execute("ALTER TABLE `oxorder` ADD COLUMN `ASIGNYCWARRESPONSE` TEXT NOT NULL DEFAULT '' COMMENT 'Final Response using WAR'");                
+            }
+            
+            // if ASIGNYCRETRESPONSE column exists?
+            if (!$oMetaData->fieldExists(strtolower("ASIGNYCRETRESPONSE"), "oxorder")) {
+                $oDb->execute("ALTER TABLE `oxorder` ADD COLUMN `ASIGNYCRETRESPONSE` TEXT NOT NULL DEFAULT '' COMMENT 'Return response for the order'");
+            }
+
+            if (!$oMetaData->fieldExists(asign_yellowcube_oxorder::YCIGNORE, "oxorder")) {
+                $oDb->execute("ALTER TABLE `oxorder` ADD COLUMN `" . asign_yellowcube_oxorder::YCIGNORE . "` SMALLINT NOT NULL DEFAULT 0 COMMENT 'Order should not be sent to YC'");
+            }
+        } catch (Exception $ex) {
+            oxRegistry::get("oxUtilsView")->addErrorToDisplay(new oxException($ex->getMessage()));
+        }
+    }
+}
+

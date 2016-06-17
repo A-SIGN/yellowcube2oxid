@@ -1,0 +1,62 @@
+<?php
+/**
+* Renders template file asign_yellowcube_overview.tpl
+*
+* PHP version 5
+* 
+* @category  Asign
+* @package   Asign_Yellowcube_V_EE
+* @author    Asign <entwicklung@a-sign.ch>
+* @copyright asign
+* @license   http://www.a-sign.ch/
+* @version   2.0
+* @link      http://www.a-sign.ch/
+* @see       Asign_YellowCube_Overview
+* @since     File available since Release 2.0
+*/
+
+/**
+* Renders Template file
+* 
+* @category Asign
+* @package  Asign_Yellowcube_V_EE
+* @author   Asign <entwicklung@a-sign.ch>
+* @license  http://www.a-sign.ch/
+* @link     http://www.a-sign.ch
+*/
+class Asign_YellowCube_Overview extends oxAdminList
+{
+    /**
+     * Executes parent method parent::render(), show the details
+     * for selected object and passed to Smarty engine and returns name of template file
+     * "asign_yellowcube_overview.tpl".
+     *
+     * @return string
+     */
+    public function render()
+    {
+        parent::render();                
+        
+        // get the inventory information
+        $oModel = oxNew("asign_yellowcube_model");
+        $this->_aViewData["aInventory"] = $oModel->getInventoryData();
+        
+        return 'asign_yellowcube_overview.tpl';
+    }
+    
+    /**
+     * Executes yellowcube Inventory status
+     *
+     * @return null
+     */
+    public function refresh()
+    {
+        $oYCube = oxNew("asign_yellowcubecore");
+        $aResponse = $oYCube->getInventory();
+        
+        // update 
+        $oModel = oxNew("asign_yellowcube_model");
+        $oModel->saveInventoryData($aResponse);
+    }
+}
+
