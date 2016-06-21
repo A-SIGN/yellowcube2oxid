@@ -136,14 +136,16 @@ class InvoicepdfOxOrder extends InvoicepdfOxOrder_parent
         $iLine = $iFooterStart;
         $oPdfBlock->text(InvoicepdfBlock::COLTHREE, $iLine, strip_tags($oShop->oxshops__oxbankname->getRawValue()));
         $iLine = $oPdfBlock->nextLine($iLine);
-        $oPdfBlock->text(InvoicepdfBlock::COLTHREE, $iLine, $this->translate('ORDER_OVERVIEW_PDF_ACCOUNTNR') . strip_tags($oShop->oxshops__oxbanknumber->value));
+        $oPdfBlock->text(InvoicepdfBlock::COLTHREE, $iLine, $this->translate('ORDER_OVERVIEW_PDF_ACCOUNTNR') . strip_tags($oShop->oxshops__oxibannumber->value));
         $iLine = $oPdfBlock->nextLine($iLine);
-        $oPdfBlock->text(InvoicepdfBlock::COLTHREE, $iLine, $this->translate('ORDER_OVERVIEW_PDF_BANKCODE') . strip_tags($oShop->oxshops__oxbankcode->value));
+        $oPdfBlock->text(InvoicepdfBlock::COLTHREE, $iLine, $this->translate('ORDER_OVERVIEW_PDF_BANKCODE') . strip_tags($oShop->oxshops__oxbiccode->value));
         $iLine = $oPdfBlock->nextLine($iLine);
         $oPdfBlock->text(InvoicepdfBlock::COLTHREE, $iLine, $this->translate('ORDER_OVERVIEW_PDF_VATID') . strip_tags($oShop->oxshops__oxvatnumber->value));
-        $iLine = $oPdfBlock->nextLine($iLine);
-        $oPdfBlock->text(InvoicepdfBlock::COLTHREE, $iLine, $this->translate('ORDER_OVERVIEW_PDF_TAXID') . strip_tags($oShop->oxshops__oxtaxnumber->value));
 
+        if ( !empty($oShop->oxshops__oxtaxnumber->value) ) {
+            $iLine = $oPdfBlock->nextLine($iLine);
+            $oPdfBlock->text(InvoicepdfBlock::COLTHREE, $iLine, $this->translate('ORDER_OVERVIEW_PDF_TAXID') . strip_tags($oShop->oxshops__oxtaxnumber->value));
+        }
         $oPdfBlock->run($oPdf);
     }
 
