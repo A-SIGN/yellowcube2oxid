@@ -27,6 +27,8 @@ class cn22labelpdfblock extends InvoicepdfBlock
     const COLFOUR = 80;
     const ADDRESSLEFT = 125;
     const ADDRESSTOP = 50;
+    const PPLINCENSE = 40;
+    const PPLEFT = 125;
 
     /**
      * Constructor
@@ -394,12 +396,48 @@ class cn22labelpdfblock extends InvoicepdfBlock
     {
         // loading active shop
         $oShop = oxRegistry::getConfig()->getActiveShop();
+        $oConfig = oxRegistry::getConfig();
+        $iClearViewLimit = 190;
+        $iPDFStart = self::PPLINCENSE;
+        $iLine = $iPDFStart;
+
+        if($oConfig->getConfigParam('blAddPPFrankate')){
+            $sShopCityName = $oShop->oxshops__oxcity->getRawValue();
+
+            $iCityLength = $this->getStringWidth($sShopCityName);
+            $this->setLineHeight(0.9);
+            $iBoxLength = 50;
+            $iLineStart = $iPDFStart;
+            $this->font($this->getFont(), '', 10);
+            $this->line(self::PPLEFT, $iPDFStart, self::PPLEFT + $iBoxLength, $iPDFStart);
+            $this->font($this->getFont(), 'B', 13);
+            $this->text(self::ADDRESSLEFT, $iLineStart, 'P.P.');
+            $iPPWidth = $this->getStringWidth('P.P.');
+            $this->font($this->getFont(), '', 6);
+            $iSenderColumn = self::ADDRESSLEFT + $iPPWidth + 6;
+            $this->text($iSenderColumn, $iLine + 0.2, 'CH-' . $oShop->oxshops__oxzip->value);
+            $this->text($this->alignRightToColumn($iClearViewLimit, 'Post CH AG'), $iLine, 'Post CH AG');
+            $iLine = $this->nextLine($iLine);
+            $this->text($iSenderColumn, $iLine, $sShopCityName);
+            $sFrankateNr = $oConfig->getConfigParam('sFrankateNr');
+            $this->text($this->alignRightToColumn($iClearViewLimit, $sFrankateNr), $iLine, $sFrankateNr);
+            $iLine = $this->nextLine($iLine);
+            $iContentLength = $iPPWidth + $iCityLength + 6;
+            $iBoxLength = ($iContentLength + 6 > $iBoxLength)? $iContentLength: $iBoxLength;
+
+            $this->line(self::PPLEFT, $iLineStart, self::PPLEFT, $iLine +1 ); // left line
+            $this->line(self::PPLEFT, $iLine +1, self::PPLEFT + $iBoxLength, $iLine +1); // bottom line
+            $this->line(self::PPLEFT + $iBoxLength, $iLineStart, self::PPLEFT + $iBoxLength, $iLine +1); // right line
+            $this->line(self::PPLEFT - 2, $iLine +2, $iClearViewLimit, $iLine + 2); // bottom line
+        }
 
         // shop information
         $this->font($this->getFont(), 'U', 6);
         $this->text(self::ADDRESSLEFT, self::ADDRESSTOP, $oShop->oxshops__oxname->getRawValue() . ' - ' . $oShop->oxshops__oxstreet->getRawValue() . ' - ' . $oShop->oxshops__oxzip->value . ' ' . $oShop->oxshops__oxcity->getRawValue());
         return $this->nextLine(self::ADDRESSTOP, 3);
     }
+
+
 
     /**
      * Set billing address info to pdf.
